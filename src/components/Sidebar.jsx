@@ -1,7 +1,11 @@
 import React, { useState } from "react";
-import { AiOutlineMenu } from "react-icons/ai";
+import { AiFillHome } from "react-icons/ai";
+import { BsFillPeopleFill } from "react-icons/bs";
+import { FaUserPlus } from "react-icons/fa";
+import { IoMdSettings } from "react-icons/io";
+import { Link } from "react-router-dom";
 const Sidebar = () => {
-  const [view, setView] = useState(false);
+  const [view, setView] = useState(true);
 
   const onViewPress = () => {
     setView(!view);
@@ -9,22 +13,18 @@ const Sidebar = () => {
 
   return (
     <div
-      className={`  h-screen max-w-xs bg-[#141E27] text-white static transition-all duration-700 ease-in-out  ${
-        view ? "w-1/2 " : "w-min "
-      }`}
+      className={`h-screen bg-[#141E27] text-white relative transition-all duration-700 ease-in-out p-4  `}
     >
-      <button className="p-4" onClick={onViewPress}>
-        <AiOutlineMenu size={30} />
-      </button>
-      {view && (
-        <div className={`flex flex-col items-center justify-around h-3/4 `}>
-          <p>Opcion 1</p>
-          <p>Opcion 1</p>
-          <p>Opcion 1</p>
-          <p>Opcion 1</p>
-          <p>Opcion 1</p>
-        </div>
-      )}
+      <div className="flex flex-col items-center justify-between h-1/2 ">
+        <Link to="/">
+          <AiFillHome size={30} />
+        </Link>
+        <Link to="/">
+          <FaUserPlus size={30} />
+        </Link>
+        <BsFillPeopleFill size={30} />
+        <IoMdSettings size={30} />
+      </div>
     </div>
   );
 };
