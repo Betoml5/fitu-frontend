@@ -1,25 +1,16 @@
 import React, { useEffect, useState } from "react";
 
-const Home = () => {
-  const [users, setUsers] = useState([]);
+import User from "../components/User";
 
-  useEffect(() => {
-    fetch("https://fakestoreapi.com/users")
-      .then((res) => res.json())
-      .then((json) => setUsers(json));
-  }, []);
+const Home = () => {
+  const labels = ["Usuarios", "Personas"];
 
   return (
-    <div className=" text-white font-semibold p-4">
-      <p className="text-3xl">Lista de clientes</p>
-
-      {users.map((user) => (
-        <div key={user.id}>
-          <p>
-            {user.name.firstname} {user.name.lastname}
-          </p>
-        </div>
-      ))}
+    <div className=" ">
+      <User />
+      <User />
+      <User />
+      <User />
     </div>
   );
 };
