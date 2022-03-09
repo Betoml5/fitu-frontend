@@ -8,4 +8,12 @@ html {
   background-color: #203239;
 }
 
+.sideBarItem {
+  @apply flex items-center my-10;
+}
+
+.sideBarItemText {
+  @apply origin-left duration-200 ml-2;
+}
+
 @tailwind utilities;
