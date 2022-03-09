@@ -1,16 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { AiFillHome } from "react-icons/ai";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { FaUserPlus } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 import { Link } from "react-router-dom";
 const Sidebar = () => {
-  const [view, setView] = useState(true);
-
-  const onViewPress = () => {
-    setView(!view);
-  };
-
   return (
     <div
       className={`h-screen bg-[#141E27] text-white relative transition-all duration-700 ease-in-out p-4  `}
@@ -19,7 +13,7 @@ const Sidebar = () => {
         <Link to="/">
           <AiFillHome size={30} />
         </Link>
-        <Link to="/">
+        <Link to="/clientes/nuevo">
           <FaUserPlus size={30} />
         </Link>
         <BsFillPeopleFill size={30} />

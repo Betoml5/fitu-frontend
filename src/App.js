@@ -3,12 +3,16 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./containers/Layout";
 import Home from "./pages/Home";
+import CustomerForm from "./components/CustomerForm";
 
 const App = () => (
   <BrowserRouter>
     <Layout>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/clientes/*">
+          <Route path="nuevo" element={<CustomerForm />} />
+        </Route>
         <Route path="*" element={<div>Not found</div>} />
       </Routes>
     </Layout>
