@@ -8,7 +8,7 @@ const Sidebar = () => {
   const [open, setOpen] = useState(false);
   return (
     <div
-      className={` ${
+      className={`h-screen ${
         open ? "w-56" : "w-20"
       } duration-500  bg-primary text-white sticky p-4  `}
     >
@@ -29,7 +29,7 @@ const Sidebar = () => {
           <FaUserPlus size={30} />
           <p className={`${!open && "hidden"} sideBarItemText `}>Nuevo</p>
         </Link>
-        <Link to="/clientes/nuevo" className="sideBarItem">
+        <Link to="/clientes" className="sideBarItem">
           <BsFillPeopleFill size={30} />
           <p className={`${!open && "hidden"} sideBarItemText `}>Clientes</p>
         </Link>

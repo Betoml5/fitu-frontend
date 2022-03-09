@@ -5,18 +5,34 @@ const CustomerForm = () => {
     e.preventDefault();
   };
 
+  const inputStyles = "p-4 rounded-lg w-full my-2";
+
   return (
-    <form className="flex flex-col w-full  p-4 h-min" onSubmit={handleSubmit}>
-      <h3 className="text-white text-xl my-4">Nuevo Cliente</h3>
-      <input type="text" placeholder="Nombre " className="p-4" required />
-      <input type="number" placeholder="Edad" className="p-4 my-2" required />
-      <select name="sexo" id="sexo" className="p-2" required>
-        <option value="masculino">Masculino</option>
-        <option value="femenino">Femenino</option>
-      </select>
-      <button className="bg-strongBlue p-4 mt-4 rounded-md text-white ">
-        Agregar
-      </button>
+    <form id="customerForm" name="customerForm" className="w-full">
+      <div className="flex flex-col w-11/12 mx-auto">
+        <label htmlFor="customerForm" className="text-white text-xl mt-4">
+          Nuevo cliente
+        </label>
+        <input type="text" placeholder="Nombres" className={inputStyles} />
+        <input
+          type="text"
+          placeholder="Apellido Paterno"
+          className={inputStyles}
+        />
+        <input
+          type="text"
+          placeholder="Apellido Materno"
+          className={inputStyles}
+        />
+        <input type="number" placeholder="Edad" className={inputStyles} />
+        <select name="sexo" id="sexo" className={inputStyles}>
+          <option value="masculino">Masculino</option>
+          <option value="femenino">Femenino</option>
+        </select>
+        <button className={`${inputStyles} bg-strongBlue text-white`}>
+          Agregar
+        </button>
+      </div>
     </form>
   );
 };
