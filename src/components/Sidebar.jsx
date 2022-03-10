@@ -33,7 +33,7 @@ const Sidebar = () => {
           <BsFillPeopleFill size={30} />
           <p className={`${!open && "hidden"} sideBarItemText `}>Clientes</p>
         </Link>
-        <Link to="/clientes/nuevo" className="sideBarItem">
+        <Link to="/ajustes" className="sideBarItem">
           <IoMdSettings size={30} />
           <p className={`${!open && "hidden"} sideBarItemText `}>Ajustes</p>
         </Link>

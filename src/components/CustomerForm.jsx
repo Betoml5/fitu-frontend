@@ -8,7 +8,12 @@ const CustomerForm = () => {
   const inputStyles = "p-4 rounded-lg w-full my-2";
 
   return (
-    <form id="customerForm" name="customerForm" className="w-full">
+    <form
+      id="customerForm"
+      name="customerForm"
+      className="w-full"
+      onSubmit={handleSubmit}
+    >
       <div className="flex flex-col w-11/12 mx-auto">
         <label htmlFor="customerForm" className="text-white text-xl mt-4">
           Nuevo cliente

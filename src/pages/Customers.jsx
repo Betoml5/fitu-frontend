@@ -23,8 +23,8 @@ const Customers = () => {
 
       <section className="flex flex-col gap-y-1 mt-4">
         {[1, 2, 3, 4, 5].map((item) => (
-          <div className="relative text-white bg-strongBlue rounded-lg p-4">
-            <p className="font-semibold">
+          <div className="relative text-white bg-strongBlue rounded-lg p-4 cursor-pointer hover:bg-opacity-90">
+            <p className="font-semibold hover:underline">
               {faker.name.firstName()} {faker.name.lastName()}
             </p>
             <p>{faker.phone.phoneNumber()}</p>

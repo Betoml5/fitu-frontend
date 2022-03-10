@@ -5,6 +5,7 @@ import Layout from "./containers/Layout";
 import Home from "./pages/Home";
 import CustomerForm from "./components/CustomerForm";
 import Customers from "./pages/Customers";
+import Settings from "./pages/Settings";
 
 const App = () => (
   <BrowserRouter>
@@ -15,6 +16,7 @@ const App = () => (
           <Route path="" element={<Customers />} />
           <Route path="nuevo" element={<CustomerForm />} />
         </Route>
+        <Route path="/ajustes" element={<Settings />} />
         <Route path="*" element={<div>Not found</div>} />
       </Routes>
     </Layout>
