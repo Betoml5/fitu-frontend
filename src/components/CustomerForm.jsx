@@ -11,7 +11,7 @@ const CustomerForm = () => {
     <form
       id="customerForm"
       name="customerForm"
-      className="w-full"
+      className="w-full max-w-3xl mx-auto"
       onSubmit={handleSubmit}
     >
       <div className="flex flex-col w-11/12 mx-auto">
@@ -34,7 +34,9 @@ const CustomerForm = () => {
           <option value="masculino">Masculino</option>
           <option value="femenino">Femenino</option>
         </select>
-        <button className={`${inputStyles} bg-strongBlue text-white`}>
+        <button
+          className={`${inputStyles} bg-strongBlue text-white hover:bg-opacity-90`}
+        >
           Agregar
         </button>
       </div>

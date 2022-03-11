@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import CustomerForm from "./components/CustomerForm";
 import Customers from "./pages/Customers";
 import Settings from "./pages/Settings";
+import Meetings from "./pages/Meetings";
 
 const App = () => (
   <BrowserRouter>
@@ -16,6 +17,7 @@ const App = () => (
           <Route path="" element={<Customers />} />
           <Route path="nuevo" element={<CustomerForm />} />
         </Route>
+        <Route path="/citas" element={<Meetings />} />
         <Route path="/ajustes" element={<Settings />} />
         <Route path="*" element={<div>Not found</div>} />
       </Routes>

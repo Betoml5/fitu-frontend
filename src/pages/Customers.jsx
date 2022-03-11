@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { AiOutlineSearch, AiOutlineUser } from "react-icons/ai";
+import {
+  AiOutlineSearch,
+  AiOutlineUser,
+  AiOutlineLoading3Quarters,
+} from "react-icons/ai";
 
 import faker from "faker";
 
 const Customers = () => {
+  const [loading, setLoading] = useState(false);
+
+  const handleSearch = () => {
+    setLoading(true);
+    setTimeout(() => {
+      console.log("hola");
+      setLoading(false);
+    }, 2000);
+  };
+
   return (
-    <div className="w-full p-4">
+    <div className="w-full p-4 max-w-3xl mx-auto">
       <section className=" text-white">
         <h3 className="font-semibold text-xl">Clientes</h3>
         <div className="flex items-center ">
@@ -15,8 +29,15 @@ const Customers = () => {
             placeholder="Nombre del cliente"
             className="text-black w-full p-4 rounded-tl-lg rounded-bl-lg mt-4 outline-none border-none placeholder:text-gray-500"
           />
-          <button className="flex items-center justify-center p-4 bg-strongBlue rounded-tr-lg rounded-br-lg w-1/4 mt-4">
-            <AiOutlineSearch size={26} />
+          <button
+            onClick={handleSearch}
+            className="flex items-center justify-center p-4 bg-strongBlue rounded-tr-lg rounded-br-lg w-1/4 mt-4 hover:bg-opacity-90"
+          >
+            {loading ? (
+              <AiOutlineLoading3Quarters size={25} className="animate-spin" />
+            ) : (
+              <AiOutlineSearch size={25} />
+            )}
           </button>
         </div>
       </section>
