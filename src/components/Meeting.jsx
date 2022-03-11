@@ -2,7 +2,7 @@ import React from "react";
 
 const Meeting = ({ id }) => {
   return (
-    <div>
+    <div className="flex flex-col justify-center w-full h-32 text-white bg-strongBlue shadow-lg rounded-lg p-4 ">
       <p>Cliente: Jesus Alberto Martinez</p>
       <p>Edad: 19</p>
       <p>Hora de cita: 19:00</p>

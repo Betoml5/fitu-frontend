@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AiFillHome, AiOutlineMenu } from "react-icons/ai";
+import { AiFillHome, AiOutlineMenu, AiOutlineLogout } from "react-icons/ai";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { FaUserPlus } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
@@ -37,6 +37,10 @@ const Sidebar = () => {
           <IoMdSettings size={30} />
           <p className={`${!open && "hidden"} sideBarItemText `}>Ajustes</p>
         </Link>
+        <div className="sideBarItem">
+          <AiOutlineLogout size={30} />
+          <p className={`${!open && "hidden"} sideBarItemText `}>Salir</p>
+        </div>
       </div>
     </div>
   );

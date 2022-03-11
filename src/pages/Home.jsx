@@ -5,6 +5,7 @@ import {
   AiOutlineMessage,
 } from "react-icons/ai";
 import { BiUserVoice } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -24,13 +25,15 @@ const Home = () => {
           <BiUserVoice size={25} className="absolute right-2 top-2" />
         </div>
       </section>
-      <section>
-        <div className="relative bg-strongBlue p-4 text-white rounded-xl  cursor-pointer hover:bg-opacity-90">
-          <p className="font-bold text-2xl">2</p>
-          <p className="font-semibold text-lg">Citas pendientes</p>
-          <AiOutlineSchedule size={25} className="absolute right-2 top-2" />
-        </div>
-      </section>
+      <Link to="/citas">
+        <section>
+          <div className="relative bg-strongBlue p-4 text-white rounded-xl  cursor-pointer hover:bg-opacity-90">
+            <p className="font-bold text-2xl">2</p>
+            <p className="font-semibold text-lg">Citas pendientes</p>
+            <AiOutlineSchedule size={25} className="absolute right-2 top-2" />
+          </div>
+        </section>
+      </Link>
       <section>
         <div className="relative bg-strongBlue p-4 text-white rounded-xl  cursor-pointer hover:bg-opacity-90">
           <p className="font-bold text-2xl">49</p>
