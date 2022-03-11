@@ -1,58 +1,46 @@
-import React, { useEffect, useState } from "react";
-import { Bar, Line } from "react-chartjs-2";
-import User from "../components/User";
-import Chart from "chart.js/auto";
+import React from "react";
+import {
+  AiOutlineUser,
+  AiOutlineSchedule,
+  AiOutlineMessage,
+} from "react-icons/ai";
+import { BiUserVoice } from "react-icons/bi";
+
 const Home = () => {
-  const labels = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-  ];
-  const data = {
-    labels,
-    datasets: [
-      {
-        label: "Dataset 1",
-        data: labels.map(() =>
-          faker.datatype.number({ min: -1000, max: 1000 })
-        ),
-        borderColor: "rgb(255, 99, 132)",
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
-      },
-      {
-        label: "Dataset 2",
-        data: labels.map(() =>
-          faker.datatype.number({ min: -1000, max: 1000 })
-        ),
-        borderColor: "rgb(53, 162, 235)",
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
-      },
-    ],
-  };
   return (
-    <div className=" ">
-      <Line
-        datasetIdKey="id"
-        data={{
-          labels: ["Jun", "Jul", "Aug"],
-          datasets: [
-            {
-              id: 1,
-              label: "",
-              data: [5, 6, 7],
-            },
-            {
-              id: 2,
-              label: "",
-              data: [3, 2, 1],
-            },
-          ],
-        }}
-      />
+    <div className="w-full max-w-3xl p-4">
+      <section>
+        <h3 className="text-white text-xl font-semibold mb-6">Dashboard</h3>
+        <div className="relative bg-strongBlue p-4 text-white rounded-xl cursor-pointer hover:bg-opacity-90">
+          <p className="font-bold text-2xl">14</p>
+          <p className="font-semibold text-lg">Clientes</p>
+          <AiOutlineUser size={25} className="absolute right-2 top-2" />
+        </div>
+      </section>
+      <section>
+        <div className="relative bg-strongBlue p-4 text-white rounded-xl my-2 cursor-pointer hover:bg-opacity-90">
+          <p className="font-bold text-2xl">29</p>
+          <p className="font-semibold text-lg">Clientes pendientes</p>
+          <BiUserVoice size={25} className="absolute right-2 top-2" />
+        </div>
+      </section>
+      <section>
+        <div className="relative bg-strongBlue p-4 text-white rounded-xl my-2 cursor-pointer hover:bg-opacity-90">
+          <p className="font-bold text-2xl">2</p>
+          <p className="font-semibold text-lg">Citas pendientes</p>
+          <AiOutlineSchedule size={25} className="absolute right-2 top-2" />
+        </div>
+      </section>
+      <section>
+        <div className="relative bg-strongBlue p-4 text-white rounded-xl my-2 cursor-pointer hover:bg-opacity-90">
+          <p className="font-bold text-2xl">49</p>
+          <p className="font-semibold text-lg">Mensajes pendientes</p>
+          <AiOutlineMessage
+            size={25}
+            className="absolute right-2 top-2 animate-pulse"
+          />
+        </div>
+      </section>
     </div>
   );
 };
