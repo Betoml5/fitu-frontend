@@ -1,7 +1,7 @@
 
 const useUser = () => {
 
-    const isLogged = false;
+    const isLogged = true;
     const isAdmin = false;
 
     return {

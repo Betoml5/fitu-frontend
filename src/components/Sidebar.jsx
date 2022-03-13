@@ -12,10 +12,11 @@ import { BsFillPeopleFill } from "react-icons/bs";
 import { FaUserPlus } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 import { Link } from "react-router-dom";
+import useUser from "../hooks/useUser";
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
-  const isLogged = true;
-  const isAdmin = false;
+
+  const { isLogged, isAdmin } = useUser();
 
   if (isAdmin) {
     return (
