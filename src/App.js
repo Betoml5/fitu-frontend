@@ -1,5 +1,3 @@
-import logo from "./logo.svg";
-import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./containers/Layout";
 import Home from "./pages/admin/Dashboard";
@@ -16,11 +14,8 @@ const App = () => (
   <BrowserRouter>
     <Layout>
       <Routes>
-        <Route element={<PrivateRoutes />}>
-          <Route path="/" element={<Dashboard />} />
-        </Route>
-        <Route element={<AdminRoutes />} >
-          <Route path="/" element={<Home />} />
+        <Route element={<AdminRoutes />}  >
+          <Route index path="/fm/dashboard" element={<Home />} />
           <Route path="/clientes/*">
             <Route path="" element={<Customers />} />
             <Route path="nuevo" element={<CustomerForm />} />
@@ -28,6 +23,12 @@ const App = () => (
           <Route path="/citas" element={<Meetings />} />
           <Route path="/ajustes" element={<Settings />} />
         </Route>
+
+        <Route element={<PrivateRoutes />}>
+          <Route xpath="/dashboard" element={<Dashboard />} index />
+        </Route>
+
+
         <Route path="/iniciar-sesion" element={<Login />} />
         <Route path="*" element={<div>Not found</div>} />
       </Routes>

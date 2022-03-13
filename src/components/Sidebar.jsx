@@ -25,7 +25,7 @@ const Sidebar = () => {
           open ? "w-56" : "w-20"
         } duration-500  bg-primary text-white sticky p-4  `}
       >
-        <div>
+        <div className="">
           <AiOutlineMenu
             size={30}
             onClick={() => setOpen(!open)}
@@ -35,7 +35,7 @@ const Sidebar = () => {
           />
           {isLogged ? (
             <div>
-              <Link to="/" className="sideBarItem">
+              <Link to="/fm/dashboard" className="sideBarItem">
                 <AiFillHome size={30} />
                 <p className={`${!open && "hidden"} sideBarItemText `}>
                   Inicio
@@ -93,7 +93,7 @@ const Sidebar = () => {
         />
         {isLogged ? (
           <div>
-            <Link to="/" className="sideBarItem">
+            <Link to="/dashboard" className="sideBarItem">
               <AiFillHome size={30} />
               <p className={`${!open && "hidden"} sideBarItemText `}>Inicio</p>
             </Link>
@@ -109,6 +109,11 @@ const Sidebar = () => {
                 Metricas
               </p>
             </Link>
+
+            <div className="sideBarItem">
+              <AiOutlineLogout size={30} />
+              <p className={`${!open && "hidden"} sideBarItemText `}>Salir</p>
+            </div>
           </div>
         ) : (
           <div>

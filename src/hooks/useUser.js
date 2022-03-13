@@ -2,7 +2,7 @@
 const useUser = () => {
 
     const isLogged = true;
-    const isAdmin = false;
+    const isAdmin = true;
 
     return {
         isLogged,
