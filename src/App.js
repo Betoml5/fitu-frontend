@@ -7,6 +7,7 @@ import CustomerForm from "./components/CustomerForm";
 import Customers from "./pages/Customers";
 import Settings from "./pages/Settings";
 import Meetings from "./pages/Meetings";
+import Login from "./pages/Login";
 
 const App = () => (
   <BrowserRouter>
@@ -19,6 +20,7 @@ const App = () => (
         </Route>
         <Route path="/citas" element={<Meetings />} />
         <Route path="/ajustes" element={<Settings />} />
+        <Route path="/iniciar-sesion" element={<Login />} />
         <Route path="*" element={<div>Not found</div>} />
       </Routes>
     </Layout>
