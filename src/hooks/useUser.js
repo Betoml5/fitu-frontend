@@ -1,11 +1,14 @@
-import React from 'react'
 
 const useUser = () => {
 
+    const isLogged = false;
+    const isAdmin = false;
 
-    return (
-        <div>useUser</div>
-    )
+    return {
+        isLogged,
+        isAdmin
+    }
+
 }
 
 export default useUser

@@ -5,6 +5,8 @@ import {
   AiOutlineLogout,
   AiOutlineLogin,
   AiOutlineUserAdd,
+  AiOutlineUser,
+  AiOutlineLineChart,
 } from "react-icons/ai";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { FaUserPlus } from "react-icons/fa";
@@ -93,6 +95,18 @@ const Sidebar = () => {
             <Link to="/" className="sideBarItem">
               <AiFillHome size={30} />
               <p className={`${!open && "hidden"} sideBarItemText `}>Inicio</p>
+            </Link>
+
+            <Link to="/" className="sideBarItem">
+              <AiOutlineUser size={30} />
+              <p className={`${!open && "hidden"} sideBarItemText `}>Cuenta</p>
+            </Link>
+
+            <Link to="/" className="sideBarItem">
+              <AiOutlineLineChart size={30} />
+              <p className={`${!open && "hidden"} sideBarItemText `}>
+                Metricas
+              </p>
             </Link>
           </div>
         ) : (

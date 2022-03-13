@@ -1,11 +1,10 @@
+import useUser from "./useUser"
 
 const useAuth = () => {
 
+    const { isLogged } = useUser();
 
-
-    return (
-        <div>useAuth</div>
-    )
+    return isLogged;
 }
 
 export default useAuth
