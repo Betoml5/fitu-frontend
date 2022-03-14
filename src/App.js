@@ -9,29 +9,32 @@ import Login from "./pages/Login";
 import PrivateRoutes from "./components/PrivateRoutes";
 import AdminRoutes from "./components/admin/AdminRoutes";
 import Dashboard from "./pages/user/Dashboard";
+import UserProvider from "./context/User";
+import { CookiesProvider } from "react-cookie";
 
 const App = () => (
   <BrowserRouter>
     <Layout>
-      <Routes>
-        <Route element={<AdminRoutes />}  >
-          <Route index path="/fm/dashboard" element={<Home />} />
-          <Route path="/clientes/*">
-            <Route path="" element={<Customers />} />
-            <Route path="nuevo" element={<CustomerForm />} />
-          </Route>
-          <Route path="/citas" element={<Meetings />} />
-          <Route path="/ajustes" element={<Settings />} />
-        </Route>
-
-        <Route element={<PrivateRoutes />}>
-          <Route xpath="/dashboard" element={<Dashboard />} index />
-        </Route>
-
-
-        <Route path="/iniciar-sesion" element={<Login />} />
-        <Route path="*" element={<div>Not found</div>} />
-      </Routes>
+      <CookiesProvider>
+        <UserProvider>
+          <Routes>
+            <Route element={<AdminRoutes />}  >
+              <Route index path="/fm/dashboard" element={<Home />} />
+              <Route path="/clientes/*">
+                <Route path="" element={<Customers />} />
+                <Route path="nuevo" element={<CustomerForm />} />
+              </Route>
+              <Route path="/citas" element={<Meetings />} />
+              <Route path="/ajustes" element={<Settings />} />
+            </Route>
+            <Route element={<PrivateRoutes />}>
+              <Route xpath="/dashboard" element={<Dashboard />} index />
+            </Route>
+            <Route path="/iniciar-sesion" element={<Login />} />
+            <Route path="*" element={<div>Not found</div>} />
+          </Routes>
+        </UserProvider>
+      </CookiesProvider>
     </Layout>
   </BrowserRouter>
 );

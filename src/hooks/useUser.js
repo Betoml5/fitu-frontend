@@ -1,7 +1,7 @@
-import axios from "axios";
 import { useContext, useState } from "react";
 import { UserContext } from "../context/User";
 import { signInService } from "../services/Auth";
+
 
 const useUser = () => {
 
