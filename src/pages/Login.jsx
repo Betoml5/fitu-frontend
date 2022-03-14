@@ -1,6 +1,9 @@
 import React from "react";
+import useUser from "../hooks/useUser";
 
 const Login = () => {
+  const { signIn } = useUser();
+
   return (
     <div className="self-center w-full max-w-xl mx-auto p-4">
       <h3 className="text-white text-xl font-semibold my-4">Iniciar sesión</h3>

@@ -9,7 +9,7 @@ import Login from "./pages/Login";
 import PrivateRoutes from "./components/PrivateRoutes";
 import AdminRoutes from "./components/admin/AdminRoutes";
 import Dashboard from "./pages/user/Dashboard";
-import UserProvider from "./context/User";
+import { UserProvider } from "./context/User"
 import { CookiesProvider } from "react-cookie";
 
 const App = () => (

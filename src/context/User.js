@@ -4,10 +4,10 @@ import React, { useEffect, useState } from "react";
 export const UserContext = React.createContext({});
 
 
-const UserProvider = ({ children }) => {
+export const UserProvider = ({ children }) => {
     const [status, setStatus] = useState({ loading: false, error: false, msg: "" })
-    const [user, setUser] = useState(() => window.localStorage("user"));
-    const [jwt, setJwt] = useState(() => window.localStorage("jwt"))
+    const [jwt, setJwt] = useState(() => window.localStorage.getItem("jwt"));
+    const [user, setUser] = useState(() => window.localStorage.getItem("user"));
 
 
     useEffect(() => {
@@ -29,5 +29,3 @@ const UserProvider = ({ children }) => {
     )
 
 }
-
-export default UserProvider
