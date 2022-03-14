@@ -1,5 +1,5 @@
 import React from "react";
-import Meeting from "../components/Meeting";
+import Meeting from "../../components/admin/Meeting";
 
 import { BiArrowBack } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
