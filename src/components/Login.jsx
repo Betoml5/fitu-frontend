@@ -44,7 +44,7 @@ const Login = () => {
         />
         {errors.password && (
           <span className="mt-4">Este campo es requerido</span>
-        )}
+        )}{" "}
         {status.error && (
           <span className="text-red-500 mt-4">{status.msg}</span>
         )}
@@ -52,7 +52,6 @@ const Login = () => {
           ¿Olvidaste tu contraseña?{" "}
           <span className="underline cursor-pointer">Recuperala</span>
         </p>
-
         <button className="flex justify-center text-white bg-strongBlue rounded-lg  my-4 p-4 hover:bg-opacity-90">
           {status.loading ? (
             <AiOutlineLoading3Quarters size={25} className="animate-spin" />

@@ -18,15 +18,14 @@ const useUser = () => {
         try {
             setStatus({ loading: true, error: false })
             const response = await signInService(email, password);
-            console.log(response)
             if (!response) {
                 setStatus({ loading: false, error: true, msg: "Ocurrio un error inesperado en el servidor" })
-                throw new Error("Unexpected error ocurred at server")
+                return;
             }
 
-            if (response?.error?.message === "Password or email incorrect") {
+            if (response?.response?.data.error.message === "Password or email incorrect") {
                 setStatus({ loading: false, error: true, msg: "La contraseña o el email son incorrectos" });
-                throw new Error("Password or email incorrect")
+                return;
             }
 
             // Guardamos el usuario en el localStorage
