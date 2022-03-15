@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const useUser = () => {
 
+    // eslint-disable-next-line no-unused-vars
     const [cookies, setCookie, removeCookie] = useCookies(['jwt']);
     const { jwt, setJwt, setUser, setStatus, status, user } = useContext(UserContext);
     const navigate = useNavigate();

@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-
 import {
   AiOutlineSearch,
   AiOutlineUser,
   AiOutlineLoading3Quarters,
 } from "react-icons/ai";
-
 import faker from "faker";
+import { Link } from "react-router-dom";
+import { getCustomersService } from "../../services/Admin";
 
 const Customers = () => {
   const [loading, setLoading] = useState(false);
+  const [customers, setCustomers] = useState([]);
 
   const handleSearch = () => {
     setLoading(true);
@@ -45,9 +46,12 @@ const Customers = () => {
       <section className="flex flex-col gap-y-1 mt-4">
         {[1, 2, 3, 4, 5].map((item) => (
           <div className="relative text-white bg-strongBlue rounded-lg p-4 cursor-pointer hover:bg-opacity-90">
-            <p className="font-semibold hover:underline">
+            <Link
+              to={`/clientes/${item}`}
+              className="font-semibold hover:underline"
+            >
               {faker.name.firstName()} {faker.name.lastName()}
-            </p>
+            </Link>
             <p>{faker.phone.phoneNumber()}</p>
             <p>Ultima cita: {faker.date.weekday()}</p>
             <AiOutlineUser size={25} className="absolute right-2 top-2" />
