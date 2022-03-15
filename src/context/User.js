@@ -10,10 +10,6 @@ export const UserProvider = ({ children }) => {
 
     const [cookies, setCookie] = useCookies('jwt');
 
-
-
-
-
     const [status, setStatus] = useState({ loading: false, error: false, msg: "" })
     const [jwt, setJwt] = useState(() => cookies.jwt);
     const [user, setUser] = useState(() => window.localStorage.getItem("user"));

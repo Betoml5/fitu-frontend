@@ -15,11 +15,11 @@ import { Link } from "react-router-dom";
 import useUser from "../hooks/useUser";
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
-  const { isLogged, user, logout } = useUser();
+  const { isLogged, user, logout, jwt } = useUser();
 
   // Here we validate if there is no user, we don't show the sidebar
 
-  if (!user) {
+  if (!user || !jwt) {
     return null;
   }
 

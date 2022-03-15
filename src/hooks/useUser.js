@@ -1,18 +1,14 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useCookies } from "react-cookie";
 import UserContext from "../context/User";
 import { signInService } from "../services/Auth";
 import { useNavigate } from "react-router-dom";
-
 
 const useUser = () => {
 
     const [cookies, setCookie, removeCookie] = useCookies(['jwt']);
     const { jwt, setJwt, setUser, setStatus, status, user } = useContext(UserContext);
     const navigate = useNavigate();
-
-
-
 
     const signIn = async (email, password) => {
         try {
@@ -32,7 +28,7 @@ const useUser = () => {
             window.localStorage.setItem("user", JSON.stringify(response.payload.user))
 
             // Seteamos una Cookie con el token
-            setCookie("jwt", response.token)
+            setCookie("jwt", response.token, { maxAge: 2592000, httpOnly: false })
             setUser(response.payload.user)
             setJwt(response.token)
             setStatus({ loading: false, error: false })
@@ -44,14 +40,11 @@ const useUser = () => {
     }
 
     const logout = () => {
-
         window.localStorage.removeItem("user");
-
         setJwt(null)
         setUser(null);
         removeCookie("jwt");
         navigate("/")
-
     }
 
     return {
