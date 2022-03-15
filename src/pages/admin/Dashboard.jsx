@@ -7,7 +7,7 @@ import {
 import { BiUserVoice } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
-const Home = () => {
+const Dashboard = () => {
   return (
     <div className="flex flex-col gap-y-2  w-full max-w-3xl p-4 mx-auto">
       <section>
@@ -48,4 +48,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Dashboard;

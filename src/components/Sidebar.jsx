@@ -15,9 +15,8 @@ import { Link } from "react-router-dom";
 import useUser from "../hooks/useUser";
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
-
-  const { isLogged, isAdmin } = useUser();
-
+  const { isLogged, isAdmin, user, logout } = useUser();
+  console.log(user);
   if (isAdmin) {
     return (
       <div
@@ -110,7 +109,10 @@ const Sidebar = () => {
               </p>
             </Link>
 
-            <div className="sideBarItem">
+            <div
+              className="sideBarItem cursor-pointer"
+              onClick={() => logout()}
+            >
               <AiOutlineLogout size={30} />
               <p className={`${!open && "hidden"} sideBarItemText `}>Salir</p>
             </div>

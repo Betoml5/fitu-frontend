@@ -1,23 +1,33 @@
 import React, { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 
 
-export const UserContext = React.createContext({});
+const UserContext = React.createContext({});
+export default UserContext;
 
 
 export const UserProvider = ({ children }) => {
+
+    const [cookies, setCookie] = useCookies('jwt');
+
+
+
+
+
     const [status, setStatus] = useState({ loading: false, error: false, msg: "" })
-    const [jwt, setJwt] = useState(() => window.localStorage.getItem("jwt"));
+    const [jwt, setJwt] = useState(() => cookies.jwt);
     const [user, setUser] = useState(() => window.localStorage.getItem("user"));
 
+    console.log("context", user)
 
     useEffect(() => {
         setUser(() => JSON.parse(window.localStorage.getItem("user")));
-        setJwt(() => window.localStorage.getItem("jwt"));
+        setJwt(() => cookies.jwt);
         return () => {
             setUser(null);
             setJwt("");
         };
-    }, []);
+    }, [cookies.jwt]);
 
 
     return (

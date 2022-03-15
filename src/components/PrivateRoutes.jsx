@@ -1,12 +1,12 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
+import useUser from "../hooks/useUser";
 import Login from "../pages/Login";
 
 const PrivateRoutes = () => {
-  const isAuth = useAuth();
+  const { isLogged } = useUser();
 
-  return isAuth ? <Outlet /> : <Login />;
+  return isLogged ? <Outlet /> : <Login />;
 };
 
 export default PrivateRoutes;

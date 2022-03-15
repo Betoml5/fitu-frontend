@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./containers/Layout";
-import Home from "./pages/admin/Dashboard";
+
 import CustomerForm from "./components/admin/CustomerForm";
 import Customers from "./pages/admin/Customers";
 import Settings from "./pages/Settings";
@@ -8,9 +8,11 @@ import Meetings from "./pages/admin/Meetings";
 import Login from "./pages/Login";
 import PrivateRoutes from "./components/PrivateRoutes";
 import AdminRoutes from "./components/admin/AdminRoutes";
-import Dashboard from "./pages/user/Dashboard";
+import UserDashboard from "./pages/user/Dashboard";
+import AdminDashboard from "./pages/admin/Dashboard"
 import { UserProvider } from "./context/User"
 import { CookiesProvider } from "react-cookie";
+import Home from "./pages/Home";
 
 const App = () => (
   <BrowserRouter>
@@ -18,8 +20,10 @@ const App = () => (
       <CookiesProvider>
         <UserProvider>
           <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/iniciar-sesion" element={<Login />} />
             <Route element={<AdminRoutes />}  >
-              <Route index path="/fm/dashboard" element={<Home />} />
+              <Route index path="/fm/dashboard" element={<AdminDashboard />} />
               <Route path="/clientes/*">
                 <Route path="" element={<Customers />} />
                 <Route path="nuevo" element={<CustomerForm />} />
@@ -27,10 +31,9 @@ const App = () => (
               <Route path="/citas" element={<Meetings />} />
               <Route path="/ajustes" element={<Settings />} />
             </Route>
-            <Route element={<PrivateRoutes />}>
-              <Route xpath="/dashboard" element={<Dashboard />} index />
+            <Route element={<PrivateRoutes />} >
+              <Route path="/dashboard" element={<UserDashboard />} index />
             </Route>
-            <Route path="/iniciar-sesion" element={<Login />} />
             <Route path="*" element={<div>Not found</div>} />
           </Routes>
         </UserProvider>

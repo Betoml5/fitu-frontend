@@ -1,13 +1,29 @@
 import React from "react";
+import { useForm } from "react-hook-form";
+import { Navigate, useNavigate } from "react-router-dom";
 import useUser from "../hooks/useUser";
 
 const Login = () => {
+  const { isLogged } = useUser();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
   const { signIn } = useUser();
+
+  const onSubmit = (data) => signIn(data.email, data.password);
+
+  if (isLogged) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <div className="self-center w-full max-w-xl mx-auto p-4">
       <h3 className="text-white text-xl font-semibold my-4">Iniciar sesión</h3>
-      <form action="" className="flex flex-col  ">
+      <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="email" className="text-white  my-2">
           Correo electronico
         </label>
@@ -16,9 +32,11 @@ const Login = () => {
           autoComplete
           placeholder="Correo electronico"
           name="email"
-          required
           className="rounded-md p-4"
+          required
+          {...register("email", { required: true })}
         />
+        {errors.email && <span>Este campo es requerido</span>}
         <label htmlFor="password" className="text-white  my-2">
           Contraseña
         </label>
@@ -27,7 +45,13 @@ const Login = () => {
           type="password"
           placeholder="Contraseña"
           className="rounded-md p-4"
+          required
+          {...register("password", { required: true })}
         />
+        {errors.password && (
+          <span className="mt-4">Este campo es requerido</span>
+        )}
+
         <p className="text-white mt-4">
           ¿Olvidaste tu contraseña?{" "}
           <span className="underline cursor-pointer">Recuperala</span>
