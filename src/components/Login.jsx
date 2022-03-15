@@ -1,10 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Navigate, useNavigate } from "react-router-dom";
 import useUser from "../hooks/useUser";
+import { AiOutlineSearch, AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const Login = () => {
-  const { isLogged } = useUser();
   const {
     register,
     handleSubmit,
@@ -12,13 +11,8 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const { signIn } = useUser();
-
+  const { signIn, status } = useUser();
   const onSubmit = (data) => signIn(data.email, data.password);
-
-  if (isLogged) {
-    return <Navigate to="/" />;
-  }
 
   return (
     <div className="self-center w-full max-w-xl mx-auto p-4">
@@ -32,7 +26,7 @@ const Login = () => {
           autoComplete
           placeholder="Correo electronico"
           name="email"
-          className="rounded-md p-4"
+          className="text-black rounded-md p-4"
           required
           {...register("email", { required: true })}
         />
@@ -44,20 +38,27 @@ const Login = () => {
           name="password"
           type="password"
           placeholder="Contraseña"
-          className="rounded-md p-4"
+          className="text-black rounded-md p-4"
           required
           {...register("password", { required: true })}
         />
         {errors.password && (
           <span className="mt-4">Este campo es requerido</span>
         )}
-
+        {status.error && (
+          <span className="text-red-500 mt-4">{status.msg}</span>
+        )}
         <p className="text-white mt-4">
           ¿Olvidaste tu contraseña?{" "}
           <span className="underline cursor-pointer">Recuperala</span>
         </p>
-        <button className="text-white bg-strongBlue rounded-lg  my-4 p-4 hover:bg-opacity-90">
-          Iniciar Sesión
+
+        <button className="flex justify-center text-white bg-strongBlue rounded-lg  my-4 p-4 hover:bg-opacity-90">
+          {status.loading ? (
+            <AiOutlineLoading3Quarters size={25} className="animate-spin" />
+          ) : (
+            "Iniciar Sesion"
+          )}
         </button>
       </form>
     </div>

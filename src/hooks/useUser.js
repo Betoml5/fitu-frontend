@@ -8,35 +8,40 @@ import { useNavigate } from "react-router-dom";
 const useUser = () => {
 
     const [cookies, setCookie, removeCookie] = useCookies(['jwt']);
-    const { jwt, setJwt, setUser, setStatus, user } = useContext(UserContext);
+    const { jwt, setJwt, setUser, setStatus, status, user } = useContext(UserContext);
     const navigate = useNavigate();
 
 
 
 
     const signIn = async (email, password) => {
-        setStatus({ loading: true, error: false })
-        const response = await signInService(email, password);
-        console.log("response", response.payload.user)
-        if (!response) {
+        try {
+            setStatus({ loading: true, error: false })
+            const response = await signInService(email, password);
+            console.log(response)
+            if (!response) {
+                setStatus({ loading: false, error: true, msg: "Ocurrio un error inesperado en el servidor" })
+                throw new Error("Unexpected error ocurred at server")
+            }
+
+            if (response?.error?.message === "Password or email incorrect") {
+                setStatus({ loading: false, error: true, msg: "La contraseña o el email son incorrectos" });
+                throw new Error("Password or email incorrect")
+            }
+
+            // Guardamos el usuario en el localStorage
+            window.localStorage.setItem("user", JSON.stringify(response.payload.user))
+
+            // Seteamos una Cookie con el token
+            setCookie("jwt", response.token)
+            setUser(response.payload.user)
+            setJwt(response.token)
+            setStatus({ loading: false, error: false })
+            navigate("/dashboard")
+        } catch (error) {
             setStatus({ loading: false, error: true, msg: "Ocurrio un error inesperado en el servidor" })
-            throw new Error("Unexpected error ocurred at server")
+            throw error;
         }
-
-        if (response?.error?.message === "Password or email incorrect") {
-            setStatus({ loading: false, error: true, msg: "La contraseña o el email son incorrectos" });
-            throw new Error("Password or email incorrect")
-        }
-
-        // Guardamos el usuario en el localStorage
-        window.localStorage.setItem("user", JSON.stringify(response.payload.user))
-
-        // Seteamos una Cookie con el token
-        setCookie("jwt", response.token)
-        setUser(response.payload.user)
-        setJwt(response.token)
-        setStatus({ loading: false, error: false })
-        navigate("/dashboard")
     }
 
     const logout = () => {
@@ -46,7 +51,7 @@ const useUser = () => {
         setJwt(null)
         setUser(null);
         removeCookie("jwt");
-        navigate("/iniciar-sesion")
+        navigate("/")
 
     }
 
@@ -55,7 +60,8 @@ const useUser = () => {
         logout,
         isLogged: Boolean(jwt),
         jwt,
-        user
+        user,
+        status,
     }
 
 }

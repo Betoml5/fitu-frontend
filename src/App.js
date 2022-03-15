@@ -5,7 +5,7 @@ import CustomerForm from "./components/admin/CustomerForm";
 import Customers from "./pages/admin/Customers";
 import Settings from "./pages/Settings";
 import Meetings from "./pages/admin/Meetings";
-import Login from "./pages/Login";
+import Login from "./components/Login";
 import PrivateRoutes from "./components/PrivateRoutes";
 import AdminRoutes from "./components/admin/AdminRoutes";
 import UserDashboard from "./pages/user/Dashboard";
@@ -16,12 +16,15 @@ import Home from "./pages/Home";
 
 const App = () => (
   <BrowserRouter>
-    <Layout>
-      <CookiesProvider>
-        <UserProvider>
+
+    <CookiesProvider>
+      <UserProvider>
+        <Layout>
           <Routes>
+
             <Route path="/" element={<Home />} />
-            <Route path="/iniciar-sesion" element={<Login />} />
+
+
             <Route element={<AdminRoutes />}  >
               <Route index path="/fm/dashboard" element={<AdminDashboard />} />
               <Route path="/clientes/*">
@@ -31,14 +34,18 @@ const App = () => (
               <Route path="/citas" element={<Meetings />} />
               <Route path="/ajustes" element={<Settings />} />
             </Route>
-            <Route element={<PrivateRoutes />} >
+
+
+            <Route element={<PrivateRoutes />}  >
               <Route path="/dashboard" element={<UserDashboard />} index />
             </Route>
+
             <Route path="*" element={<div>Not found</div>} />
+
           </Routes>
-        </UserProvider>
-      </CookiesProvider>
-    </Layout>
+        </Layout>
+      </UserProvider>
+    </CookiesProvider>
   </BrowserRouter>
 );
 

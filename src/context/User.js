@@ -18,8 +18,6 @@ export const UserProvider = ({ children }) => {
     const [jwt, setJwt] = useState(() => cookies.jwt);
     const [user, setUser] = useState(() => window.localStorage.getItem("user"));
 
-    console.log("context", user)
-
     useEffect(() => {
         setUser(() => JSON.parse(window.localStorage.getItem("user")));
         setJwt(() => cookies.jwt);

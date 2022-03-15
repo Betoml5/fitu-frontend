@@ -3,9 +3,9 @@ import { Navigate, Outlet } from "react-router-dom";
 import useUser from "../../hooks/useUser";
 
 const AdminRoute = () => {
-  const { isAdmin } = useUser();
+  const { user } = useUser();
 
-  return isAdmin ? <Outlet /> : <Navigate to="/" replace />;
+  return user.role === "admin" ? <Outlet /> : <Navigate to="/" replace />;
 };
 
 export default AdminRoute;

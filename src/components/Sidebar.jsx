@@ -15,9 +15,15 @@ import { Link } from "react-router-dom";
 import useUser from "../hooks/useUser";
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
-  const { isLogged, isAdmin, user, logout } = useUser();
-  console.log(user);
-  if (isAdmin) {
+  const { isLogged, user, logout } = useUser();
+
+  // Here we validate if there is no user, we don't show the sidebar
+
+  if (!user) {
+    return null;
+  }
+
+  if (user.role === "admin") {
     return (
       <div
         className={`h-screen ${
@@ -56,7 +62,10 @@ const Sidebar = () => {
                   Ajustes
                 </p>
               </Link>
-              <div className="sideBarItem">
+              <div
+                className="sideBarItem cursor-pointer"
+                onClick={() => logout()}
+              >
                 <AiOutlineLogout size={30} />
                 <p className={`${!open && "hidden"} sideBarItemText `}>Salir</p>
               </div>
