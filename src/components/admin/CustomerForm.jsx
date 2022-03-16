@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-
+import { BsClipboardData } from "react-icons/bs";
+import { ImManWoman } from "react-icons/im";
+import { AiFillFolderOpen, AiOutlineUser } from "react-icons/ai";
+import { FaWeight } from "react-icons/fa";
 const CustomerForm = () => {
   const [step, setStep] = useState(1);
 
@@ -7,62 +10,177 @@ const CustomerForm = () => {
     e.preventDefault();
   };
 
-  const nextStep = () => {};
+  const nextStep = () => {
+    setStep(step + 1);
+  };
 
   const previusStep = () => {};
 
-  const inputStyles = "p-4 rounded-lg w-full my-2";
+  const inputStyles = "p-4 rounded-lg w-full my-2 ";
 
   return (
     <form
       id="customerForm"
       name="customerForm"
-      className="w-full max-w-3xl mx-auto"
+      className="w-full max-w-3xl mx-auto self-center"
       onSubmit={handleSubmit}
     >
       <div className="flex flex-col w-11/12 mx-auto">
-        <label htmlFor="customerForm" className="text-white text-xl mt-4">
-          Nuevo cliente
-        </label>
-        {step === 1 && (
-          <h3 className="bg-white py-2 px-4 my-4 rounded-full">
-            Datos generales
-          </h3>
-        )}
+        <div className="flex items-center mb-10">
+          <div
+            className={`${
+              step === 1 && "border-2  animate-pulse"
+            }  border-2 border-strongBlue bg-white rounded-full p-4`}
+          >
+            <AiOutlineUser size={25} />
+          </div>
+          <div className="text-white text-xl mx-2">-</div>
+          <div
+            className={`${
+              step === 2 && "border-2  animate-pulse"
+            } border-2 border-strongBlue bg-white rounded-full p-4`}
+          >
+            <ImManWoman size={25} />
+          </div>
+          <div className="text-white text-xl mx-2">-</div>
+          <div
+            className={`${
+              step === 3 && "border-2  animate-pulse"
+            } border-2 border-strongBlue bg-white rounded-full p-4`}
+          >
+            <BsClipboardData size={25} />
+          </div>
+        </div>
+
         {step === 1 && (
           <div>
-            <input type="text" placeholder="Nombres" className={inputStyles} />
+            <label htmlFor="name" className="text-white text-lg">
+              Nombre
+            </label>
             <input
               type="text"
-              placeholder="Apellido Paterno"
+              name="name"
+              placeholder="Ana Sofia"
+              className={inputStyles}
+            />
+            <label htmlFor="lastName" className="text-white text-lg">
+              Apellidos
+            </label>
+            <input
+              type="text"
+              placeholder="Perez Rodriguez"
+              className={`${inputStyles} `}
+            />
+            <label htmlFor="lastName" className="text-white text-lg">
+              Numero de celular
+            </label>
+            <input
+              type="text"
+              placeholder="8611262242"
+              className={`${inputStyles} `}
+            />
+            <label htmlFor="lastName" className="text-white text-lg">
+              Correo Electronico
+            </label>
+            <input
+              type="text"
+              placeholder="anasofia@hotmail.com"
+              className={`${inputStyles} `}
+            />
+          </div>
+        )}
+
+        {step === 2 && (
+          <div>
+            <label htmlFor="age" className="text-white text-lg">
+              Edad
+            </label>
+            <input
+              type="number"
+              placeholder="Edad"
+              name="age"
+              id="age"
+              className={inputStyles}
+            />
+            <label htmlFor="sex" className="text-white text-lg">
+              Sexo
+            </label>
+            <select name="sex" id="sex" className={inputStyles}>
+              <option value="man">Masculino</option>
+              <option value="woman">Femenino</option>
+            </select>
+          </div>
+        )}
+        {step === 3 && (
+          <div>
+            <label htmlFor="weight" className="text-white text-lg">
+              Peso
+            </label>
+            <input
+              type="number"
+              placeholder="59kg"
+              name="weight"
+              id="weight"
+              className={inputStyles}
+            />
+            <label htmlFor="leg" className="text-white text-lg">
+              Pierna
+            </label>
+            <input
+              type="number"
+              placeholder="23cm"
+              name="leg"
+              id="leg"
+              className={inputStyles}
+            />
+            <label htmlFor="arm" className="text-white text-lg">
+              Brazo
+            </label>
+            <input
+              type="number"
+              placeholder="15cm"
+              name="arm"
+              id="arm"
               className={inputStyles}
             />
           </div>
         )}
-        {/* <label htmlFor="customerForm" className="text-white text-xl mt-4">
-          Nuevo cliente
-        </label>
-        <input type="text" placeholder="Nombres" className={inputStyles} />
-        <input
-          type="text"
-          placeholder="Apellido Paterno"
-          className={inputStyles}
-        />
-        <input
-          type="text"
-          placeholder="Apellido Materno"
-          className={inputStyles}
-        />
-        <input type="number" placeholder="Edad" className={inputStyles} />
-        <select name="sexo" id="sexo" className={inputStyles}>
-          <option value="man">Masculino</option>
-          <option value="woman">Femenino</option>
-        </select>
-        <button
-          className={`${inputStyles} bg-strongBlue text-white hover:bg-opacity-90`}
-        >
-          Agregar
-        </button> */}
+        <section className="flex items-center justify-between flex-wrap mt-4">
+          {step < 5 && (
+            <button
+              type="button"
+              onClick={nextStep}
+              className="inline-flex text-white bg-strongBlue border-0 py-2 px-6  focus:outline-none hover:bg-opacity-90 rounded text-lg"
+            >
+              Siguiente paso
+            </button>
+          )}
+          {step > 1 && step < 6 && (
+            <button
+              type="button"
+              onClick={() => setStep(step - 1)}
+              className="inline-flex text-white bg-strongBlue border-0 py-2 px-6 focus:outline-none hover:bg-opacity-90 rounded text-lg"
+            >
+              Volver
+            </button>
+          )}
+          {step > 1 && (
+            <button
+              type="button"
+              className="inline-flex text-white bg-red-500 border-0 py-2 px-6 my-2 focus:outline-none hover:bg-red-400 rounded text-lg"
+              onClick={() => {
+                setStep(1);
+              }}
+            >
+              Cancelar
+            </button>
+          )}
+          {step > 5 && (
+            <section className="self-center  justify-self-center">
+              Ups! Te perdiste
+            </section>
+          )}
+        </section>
       </div>
     </form>
   );
