@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AiOutlineSearch,
   AiOutlineUser,
@@ -6,11 +6,13 @@ import {
 } from "react-icons/ai";
 import faker from "faker";
 import { Link } from "react-router-dom";
-import { getCustomersService } from "../../services/Admin";
+
+import useAdmin from "../../hooks/useAdmin";
 
 const Customers = () => {
   const [loading, setLoading] = useState(false);
   const [customers, setCustomers] = useState([]);
+  const { getCustomers } = useAdmin();
 
   const handleSearch = () => {
     setLoading(true);
@@ -19,6 +21,13 @@ const Customers = () => {
       setLoading(false);
     }, 2000);
   };
+
+  useEffect(() => {
+    (async () => {
+      const customers = await getCustomers();
+      setCustomers(customers);
+    })();
+  }, []);
 
   return (
     <div className="w-full p-4 max-w-3xl mx-auto">
@@ -44,13 +53,13 @@ const Customers = () => {
       </section>
 
       <section className="flex flex-col gap-y-1 mt-4">
-        {[1, 2, 3, 4, 5].map((item) => (
+        {customers.map((customer) => (
           <div className="relative text-white bg-strongBlue rounded-lg p-4 cursor-pointer hover:bg-opacity-90">
             <Link
-              to={`/clientes/${item}`}
+              to={`/clientes/${customer._id}`}
               className="font-semibold hover:underline"
             >
-              {faker.name.firstName()} {faker.name.lastName()}
+              {customer.firstName} {customer.lastName}
             </Link>
             <p>{faker.phone.phoneNumber()}</p>
             <p>Ultima cita: {faker.date.weekday()}</p>
