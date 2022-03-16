@@ -1,12 +1,16 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
-import Login from "../pages/Login";
+import { Navigate, Outlet } from "react-router-dom";
+import useUser from "../hooks/useUser";
+import Login from "./Login";
 
 const PrivateRoutes = () => {
-  const isAuth = useAuth();
+  const { isLogged, user } = useUser();
 
-  return isAuth ? <Outlet /> : <Login />;
+  if (user.role === "admin") {
+    return <Navigate to="/fm/dashboard" />;
+  }
+
+  return isLogged ? <Outlet /> : <Login />;
 };
 
 export default PrivateRoutes;
