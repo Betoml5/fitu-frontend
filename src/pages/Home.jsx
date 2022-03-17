@@ -12,9 +12,7 @@ const Home = () => {
 
   return (
     <div className="self-center w-full ">
-      <section className="text-white p-4">
-        <Login />
-      </section>
+      <Login />
     </div>
   );
 };
