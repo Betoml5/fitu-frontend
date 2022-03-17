@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { BsClipboardData } from "react-icons/bs";
 import { ImManWoman } from "react-icons/im";
-import { AiFillFolderOpen, AiOutlineUser } from "react-icons/ai";
-import { FaWeight } from "react-icons/fa";
+import {
+  AiFillFolderOpen,
+  AiOutlineUser,
+  AiOutlineCheck,
+} from "react-icons/ai";
+
 const CustomerForm = () => {
   const [step, setStep] = useState(1);
 
@@ -14,8 +18,6 @@ const CustomerForm = () => {
     setStep(step + 1);
   };
 
-  const previusStep = () => {};
-
   const inputStyles = "p-4 rounded-lg w-full my-2 ";
 
   return (
@@ -26,29 +28,37 @@ const CustomerForm = () => {
       onSubmit={handleSubmit}
     >
       <div className="flex flex-col w-11/12 mx-auto">
-        <div className="flex items-center mb-10">
+        <div className="flex flex-wrap items-center justify-between mb-10">
           <div
             className={`${
               step === 1 && "border-2  animate-pulse"
-            }  border-2 border-strongBlue bg-white rounded-full p-4`}
+            }  border-2 border-strongBlue bg-white rounded-full p-2 sm:p-4`}
           >
             <AiOutlineUser size={25} />
           </div>
-          <div className="text-white text-xl mx-2">-</div>
+          <div className="text-white text-xl mx-2 hidden w-0 md:block">-</div>
           <div
             className={`${
               step === 2 && "border-2  animate-pulse"
-            } border-2 border-strongBlue bg-white rounded-full p-4`}
+            } border-2 border-strongBlue bg-white rounded-full p-2 sm:p-4`}
           >
             <ImManWoman size={25} />
           </div>
-          <div className="text-white text-xl mx-2">-</div>
+          <div className="text-white text-xl mx-2 hidden w-0 md:block">-</div>
           <div
             className={`${
               step === 3 && "border-2  animate-pulse"
-            } border-2 border-strongBlue bg-white rounded-full p-4`}
+            } border-2 border-strongBlue bg-white rounded-full p-2 sm:p-4`}
           >
             <BsClipboardData size={25} />
+          </div>
+          <div className="text-white text-xl mx-2 hidden w-0 md:block">-</div>
+          <div
+            className={`${
+              step === 4 && "border-2  animate-pulse"
+            } border-2 border-strongBlue bg-white rounded-full p-2 sm:p-4`}
+          >
+            <AiOutlineCheck size={25} />
           </div>
         </div>
 
@@ -143,10 +153,47 @@ const CustomerForm = () => {
               id="arm"
               className={inputStyles}
             />
+
+            <div className="flex justify-between">
+              <div className=" w-1/2">
+                <label htmlFor="arm" className="text-white text-lg">
+                  Cintura
+                </label>
+                <input
+                  type="number"
+                  placeholder="15cm"
+                  name="arm"
+                  id="arm"
+                  className={inputStyles}
+                />
+              </div>
+
+              <div className="w-1/2 ml-1 text-right">
+                <label htmlFor="arm" className="text-white text-lg">
+                  Abdomen
+                </label>
+                <input
+                  type="number"
+                  placeholder="25cm"
+                  name="arm"
+                  id="arm"
+                  className={`${inputStyles} text-right placeholder:text-right`}
+                />
+              </div>
+            </div>
           </div>
         )}
         <section className="flex items-center justify-between flex-wrap mt-4">
-          {step < 5 && (
+          {step === 4 && (
+            <button
+              onSubmit={handleSubmit}
+              type="submit"
+              className=" text-white bg-strongBlue border-0 py-2 px-6 focus:outline-none hover:bg-opacity-90rounded text-lg"
+            >
+              Enviar reporte
+            </button>
+          )}
+          {step < 4 && (
             <button
               type="button"
               onClick={nextStep}
@@ -155,11 +202,11 @@ const CustomerForm = () => {
               Siguiente paso
             </button>
           )}
-          {step > 1 && step < 6 && (
+          {step > 1 && step < 5 && (
             <button
               type="button"
               onClick={() => setStep(step - 1)}
-              className="inline-flex text-white bg-strongBlue border-0 py-2 px-6 focus:outline-none hover:bg-opacity-90 rounded text-lg"
+              className="inline-flex text-white bg-strongBlue border-0 py-2 px-6 my-2 focus:outline-none hover:bg-opacity-90 rounded text-lg"
             >
               Volver
             </button>
@@ -167,7 +214,7 @@ const CustomerForm = () => {
           {step > 1 && (
             <button
               type="button"
-              className="inline-flex text-white bg-red-500 border-0 py-2 px-6 my-2 focus:outline-none hover:bg-red-400 rounded text-lg"
+              className="inline-flex text-white bg-red-700 border-0 py-2 px-6  focus:outline-none hover:bg-red-400 rounded text-lg"
               onClick={() => {
                 setStep(1);
               }}
@@ -175,7 +222,7 @@ const CustomerForm = () => {
               Cancelar
             </button>
           )}
-          {step > 5 && (
+          {step > 4 && (
             <section className="self-center  justify-self-center">
               Ups! Te perdiste
             </section>
