@@ -6,17 +6,23 @@ import {
   AiOutlineUser,
   AiOutlineCheck,
 } from "react-icons/ai";
+import { useForm } from "react-hook-form";
 
 const CustomerForm = () => {
   const [step, setStep] = useState(1);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
   const nextStep = () => {
     setStep(step + 1);
   };
+
+  const onSubmit = (data) => console.log(data);
 
   const inputStyles = "p-4 rounded-lg w-full my-2 ";
 
@@ -25,7 +31,7 @@ const CustomerForm = () => {
       id="customerForm"
       name="customerForm"
       className="w-full max-w-3xl mx-auto self-center"
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(onSubmit)}
     >
       <div className="flex flex-col w-11/12 mx-auto">
         <div className="flex flex-wrap items-center justify-between mb-10">
@@ -72,6 +78,7 @@ const CustomerForm = () => {
               name="name"
               placeholder="Ana Sofia"
               className={inputStyles}
+              {...register("firstName", { required: true })}
             />
             <label htmlFor="lastName" className="text-white text-lg">
               Apellidos
@@ -80,6 +87,7 @@ const CustomerForm = () => {
               type="text"
               placeholder="Perez Rodriguez"
               className={`${inputStyles} `}
+              {...register("lastName", { required: true })}
             />
             <label htmlFor="lastName" className="text-white text-lg">
               Numero de celular
@@ -88,6 +96,7 @@ const CustomerForm = () => {
               type="text"
               placeholder="8611262242"
               className={`${inputStyles} `}
+              {...register("phone", { required: true })}
             />
             <label htmlFor="lastName" className="text-white text-lg">
               Correo Electronico
@@ -96,6 +105,7 @@ const CustomerForm = () => {
               type="text"
               placeholder="anasofia@hotmail.com"
               className={`${inputStyles} `}
+              {...register("email", { required: true })}
             />
           </div>
         )}
@@ -111,6 +121,7 @@ const CustomerForm = () => {
               name="age"
               id="age"
               className={inputStyles}
+              {...register("age", { required: true })}
             />
             <label htmlFor="sex" className="text-white text-lg">
               Sexo
@@ -123,41 +134,38 @@ const CustomerForm = () => {
         )}
         {step === 3 && (
           <div>
-            <label htmlFor="weight" className="text-white text-lg">
-              Peso
-            </label>
-            <input
-              type="number"
-              placeholder="59kg"
-              name="weight"
-              id="weight"
-              className={inputStyles}
-            />
-            <label htmlFor="leg" className="text-white text-lg">
-              Pierna
-            </label>
-            <input
-              type="number"
-              placeholder="23cm"
-              name="leg"
-              id="leg"
-              className={inputStyles}
-            />
-            <label htmlFor="arm" className="text-white text-lg">
-              Brazo
-            </label>
-            <input
-              type="number"
-              placeholder="15cm"
-              name="arm"
-              id="arm"
-              className={inputStyles}
-            />
-
             <div className="flex justify-between">
-              <div className=" w-1/2">
+              <div className="w-1/2">
+                <label htmlFor="weight" className="text-white text-lg">
+                  Peso
+                </label>
+                <input
+                  type="number"
+                  placeholder="59kg"
+                  name="weight"
+                  id="weight"
+                  className={inputStyles}
+                  {...register("weight", { required: true })}
+                />
+              </div>
+              <div className="w-1/2 ml-2">
+                <label htmlFor="height" className="text-white text-lg">
+                  Altura
+                </label>
+                <input
+                  type="number"
+                  placeholder="173cm"
+                  name="height"
+                  id="height"
+                  className={inputStyles}
+                  {...register("height", { required: true })}
+                />
+              </div>
+            </div>
+            <div className="flex justify-between">
+              <div className="w-1/2">
                 <label htmlFor="arm" className="text-white text-lg">
-                  Cintura
+                  Brazo
                 </label>
                 <input
                   type="number"
@@ -167,19 +175,57 @@ const CustomerForm = () => {
                   className={inputStyles}
                 />
               </div>
+              <div className="w-1/2 ml-2">
+                <label htmlFor="leg" className="text-white text-lg">
+                  Pierna
+                </label>
+                <input
+                  type="number"
+                  placeholder="23cm"
+                  name="leg"
+                  id="leg"
+                  className={inputStyles}
+                  {...register("leg", { required: true })}
+                />
+              </div>
+            </div>
 
-              <div className="w-1/2 ml-1 text-right">
-                <label htmlFor="arm" className="text-white text-lg">
+            <div className="flex justify-between">
+              <div className=" w-1/2">
+                <label htmlFor="waist" className="text-white text-lg">
+                  Cintura
+                </label>
+                <input
+                  type="number"
+                  placeholder="15cm"
+                  name="waist"
+                  id="waist"
+                  className={inputStyles}
+                  {...register("waist", { required: true })}
+                />
+              </div>
+
+              <div className="w-1/2 ml-2 ">
+                <label htmlFor="abdomen" className="text-white text-lg">
                   Abdomen
                 </label>
                 <input
                   type="number"
                   placeholder="25cm"
-                  name="arm"
-                  id="arm"
-                  className={`${inputStyles} text-right placeholder:text-right`}
+                  name="abdomen"
+                  id="abdomen"
+                  className={inputStyles}
+                  {...register("abdomen", { required: true })}
                 />
               </div>
+            </div>
+          </div>
+        )}
+        {step === 4 && (
+          <div className="text-white">
+            <h3 className="text-xl">Confirmación de datos</h3>
+            <div>
+              <p>{watch("firstName")}</p>
             </div>
           </div>
         )}
