@@ -14,10 +14,23 @@ const CustomerForm = () => {
   const schema = yup.object().shape({
     firstName: yup.string().required(),
     lastName: yup.string().required(),
-    phone: yup.string().required(),
-    email: yup.string().email().required(),
-    age: yup.number().max(99).min(8).required(),
-    sex: yup.string().required(),
+    phone: yup
+      .string()
+      .min(10, "Introduce un numero de telefono valido")
+      .max(10, "Introduce un numero de telefono valido")
+      .required("Este campo es obligatorio"),
+    email: yup.string().email("Introduce un email valido").required(),
+    age: yup.number().max(99).min(8).required("Este campo es obligatorio"),
+    sex: yup.string().required().required("Este campo es obligatorio"),
+    weight: yup
+      .number("Este campo debe ser un numero")
+      .min(20)
+      .max(
+        250,
+        "Estos datos exceden lo establecido en el modelo, comunicate con el desarrollador"
+      )
+      .required("Este campo es obligatorio"),
+    height: yup.number().min(130).max(230).required(),
   });
 
   const [step, setStep] = useState(1);
@@ -26,15 +39,28 @@ const CustomerForm = () => {
     register,
     handleSubmit,
     watch,
-    setError,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      phone: "",
+      email: "",
+      age: "",
+      sex: "Masculino",
+    },
+  });
 
   const nextStep = () => {
     setStep(step + 1);
   };
   const onSubmit = (data) => console.log(data);
   const inputStyles = "p-4 rounded-lg w-full my-2";
+
+  console.log(watch("arm"));
+
+  console.log(errors);
 
   return (
     <form
@@ -115,7 +141,7 @@ const CustomerForm = () => {
               {...register("phone", { required: true })}
             />
             {errors.phone && (
-              <p className="text-red-500">Este campo es obligatorio</p>
+              <p className="text-red-500">{errors.phone.message}</p>
             )}
             <label htmlFor="lastName" className="text-white text-lg">
               Correo Electronico
@@ -127,7 +153,7 @@ const CustomerForm = () => {
               {...register("email", { required: true })}
             />
             {errors.email && (
-              <p className="text-red-500">Este campo es obligatorio</p>
+              <p className="text-red-500">{errors.email.message}</p>
             )}
           </div>
         )}
@@ -180,6 +206,9 @@ const CustomerForm = () => {
                   className={inputStyles}
                   {...register("weight", { required: true })}
                 />
+                {errors.weight && (
+                  <p className="text-red-500">{errors.weight.message}</p>
+                )}
               </div>
               <div className="w-1/2 ml-2">
                 <label htmlFor="height" className="text-white text-lg">
@@ -193,6 +222,9 @@ const CustomerForm = () => {
                   className={inputStyles}
                   {...register("height", { required: true })}
                 />
+                {errors.height && (
+                  <p className="text-red-500">Este campo es obligatorio</p>
+                )}
               </div>
             </div>
             <div className="flex justify-between">
@@ -222,6 +254,12 @@ const CustomerForm = () => {
                   {...register("leg", { required: true })}
                 />
               </div>
+              {errors.leg && (
+                <p className="text-red-500">Este campo es obligatorio</p>
+              )}
+              {errors.arm && (
+                <p className="text-red-500">Este campo es obligatorio</p>
+              )}
             </div>
 
             <div className="flex justify-between">
@@ -237,6 +275,9 @@ const CustomerForm = () => {
                   className={inputStyles}
                   {...register("waist", { required: true })}
                 />
+                {errors.waist && (
+                  <p className="text-red-500">Este campo es obligatorio</p>
+                )}
               </div>
 
               <div className="w-1/2 ml-2 ">
@@ -251,6 +292,9 @@ const CustomerForm = () => {
                   className={inputStyles}
                   {...register("abdomen", { required: true })}
                 />
+                {errors.abdomen && (
+                  <p className="text-red-500">Este campo es obligatorio</p>
+                )}
               </div>
             </div>
           </div>
