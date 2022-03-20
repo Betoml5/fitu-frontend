@@ -6,8 +6,10 @@ import {
   AiOutlineUser,
   AiOutlineCheck,
 } from "react-icons/ai";
-import { useForm } from "react-hook-form";
 
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers";
 const CustomerForm = () => {
   const [step, setStep] = useState(1);
 
@@ -15,16 +17,26 @@ const CustomerForm = () => {
     register,
     handleSubmit,
     watch,
+    setError,
     formState: { errors },
-  } = useForm();
+  } = useForm({ resolver: yupResolver });
 
   const nextStep = () => {
     setStep(step + 1);
   };
-
   const onSubmit = (data) => console.log(data);
+  const inputStyles = "p-4 rounded-lg w-full my-2";
 
-  const inputStyles = "p-4 rounded-lg w-full my-2 ";
+  const schema = yup.object().shape({
+    firstName: yup.string().required(),
+    lastName: yup.string().required(),
+    phone: yup.string().required(),
+    email: yup.string().email().required(),
+    age: yup.number().max(99).min(8).required(),
+    sex: yup.string().required(),
+  });
+
+  console.log(watch("firstName"));
 
   return (
     <form
@@ -80,6 +92,7 @@ const CustomerForm = () => {
               className={inputStyles}
               {...register("firstName", { required: true })}
             />
+            {errors.firstName && <span>Este campo es obligatorio</span>}
             <label htmlFor="lastName" className="text-white text-lg">
               Apellidos
             </label>
@@ -126,7 +139,12 @@ const CustomerForm = () => {
             <label htmlFor="sex" className="text-white text-lg">
               Sexo
             </label>
-            <select name="sex" id="sex" className={inputStyles}>
+            <select
+              name="sex"
+              id="sex"
+              className={inputStyles}
+              {...register("sex", { required: true })}
+            >
               <option value="man">Masculino</option>
               <option value="woman">Femenino</option>
             </select>
@@ -225,7 +243,10 @@ const CustomerForm = () => {
           <div className="text-white">
             <h3 className="text-xl">Confirmación de datos</h3>
             <div>
-              <p>{watch("firstName")}</p>
+              <p>Nombre: {watch("firstName")}</p>
+              <p>Apellidos: {watch("lastName")}</p>
+              <p>Numero de celular {watch("phone")}</p>
+              <p>Correo electronico {watch("email")}</p>
             </div>
           </div>
         )}
@@ -241,7 +262,7 @@ const CustomerForm = () => {
           )}
           {step < 4 && (
             <button
-              type="button"
+              type="submit"
               onClick={nextStep}
               className="inline-flex text-white bg-strongBlue border-0 py-2 px-6  focus:outline-none hover:bg-opacity-90 rounded text-lg"
             >
