@@ -12,25 +12,37 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 const CustomerForm = () => {
   const schema = yup.object().shape({
-    firstName: yup.string().required(),
-    lastName: yup.string().required(),
+    firstName: yup.string().required("Este campo es obligatorio"),
+    lastName: yup.string().required("Este campo es obligatorio"),
     phone: yup
       .string()
       .min(10, "Introduce un numero de telefono valido")
       .max(10, "Introduce un numero de telefono valido")
       .required("Este campo es obligatorio"),
-    email: yup.string().email("Introduce un email valido").required(),
-    age: yup.number().max(99).min(8).required("Este campo es obligatorio"),
-    sex: yup.string().required().required("Este campo es obligatorio"),
-    weight: yup
-      .number("Este campo debe ser un numero")
-      .min(20)
-      .max(
-        250,
-        "Estos datos exceden lo establecido en el modelo, comunicate con el desarrollador"
-      )
+    email: yup
+      .string()
+      .email("Introduce un email valido")
       .required("Este campo es obligatorio"),
-    height: yup.number().min(130).max(230).required(),
+    age: yup
+      .number()
+      .typeError("La edad debe ser un numero")
+      .max(99, "La edad maxima es de 99 años")
+      .min(8, "La edad minima es de 8 años")
+      .required("Este campo es obligatorio"),
+    sex: yup.string().required("Este campo es obligatorio"),
+    weight: yup
+      .number()
+      .typeError("El peso deber ser numero")
+      .min(20, "El peso minimo es de 20kg")
+      .max(250, "El paso maximo son 250kg")
+      .required("Este campo es obligatorio"),
+    height: yup
+      .number()
+      .min(100, "La altura minima es de 100cm")
+      .max(230, "La altura maxima es de 230cm")
+      .required("Este campo es obligatorio"),
+    leg: yup.number().min(5).max(50).required("Este campo es obligatorio"),
+    arm: yup.number().min(5).max(50).required("Este campo es obligatorio"),
   });
 
   const [step, setStep] = useState(1);
@@ -42,14 +54,6 @@ const CustomerForm = () => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      phone: "",
-      email: "",
-      age: "",
-      sex: "Masculino",
-    },
   });
 
   const nextStep = () => {
