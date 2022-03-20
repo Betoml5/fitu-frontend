@@ -9,24 +9,8 @@ import {
 
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers";
+import { yupResolver } from "@hookform/resolvers/yup";
 const CustomerForm = () => {
-  const [step, setStep] = useState(1);
-
-  const {
-    register,
-    handleSubmit,
-    watch,
-    setError,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver });
-
-  const nextStep = () => {
-    setStep(step + 1);
-  };
-  const onSubmit = (data) => console.log(data);
-  const inputStyles = "p-4 rounded-lg w-full my-2";
-
   const schema = yup.object().shape({
     firstName: yup.string().required(),
     lastName: yup.string().required(),
@@ -36,7 +20,21 @@ const CustomerForm = () => {
     sex: yup.string().required(),
   });
 
-  console.log(watch("firstName"));
+  const [step, setStep] = useState(1);
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setError,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
+
+  const nextStep = () => {
+    setStep(step + 1);
+  };
+  const onSubmit = (data) => console.log(data);
+  const inputStyles = "p-4 rounded-lg w-full my-2";
 
   return (
     <form
@@ -92,7 +90,9 @@ const CustomerForm = () => {
               className={inputStyles}
               {...register("firstName", { required: true })}
             />
-            {errors.firstName && <span>Este campo es obligatorio</span>}
+            {errors.firstName && (
+              <p className="text-red-500">Este campo es obligatorio</p>
+            )}
             <label htmlFor="lastName" className="text-white text-lg">
               Apellidos
             </label>
@@ -102,6 +102,9 @@ const CustomerForm = () => {
               className={`${inputStyles} `}
               {...register("lastName", { required: true })}
             />
+            {errors.lastName && (
+              <p className="text-red-500">Este campo es obligatorio</p>
+            )}
             <label htmlFor="lastName" className="text-white text-lg">
               Numero de celular
             </label>
@@ -111,6 +114,9 @@ const CustomerForm = () => {
               className={`${inputStyles} `}
               {...register("phone", { required: true })}
             />
+            {errors.phone && (
+              <p className="text-red-500">Este campo es obligatorio</p>
+            )}
             <label htmlFor="lastName" className="text-white text-lg">
               Correo Electronico
             </label>
@@ -120,6 +126,9 @@ const CustomerForm = () => {
               className={`${inputStyles} `}
               {...register("email", { required: true })}
             />
+            {errors.email && (
+              <p className="text-red-500">Este campo es obligatorio</p>
+            )}
           </div>
         )}
 
@@ -136,6 +145,9 @@ const CustomerForm = () => {
               className={inputStyles}
               {...register("age", { required: true })}
             />
+            {errors.age && (
+              <p className="text-red-500">Este campo es obligatorio</p>
+            )}
             <label htmlFor="sex" className="text-white text-lg">
               Sexo
             </label>
@@ -148,6 +160,9 @@ const CustomerForm = () => {
               <option value="man">Masculino</option>
               <option value="woman">Femenino</option>
             </select>
+            {errors.sex && (
+              <p className="text-red-500">Este campo es obligatorio</p>
+            )}
           </div>
         )}
         {step === 3 && (
@@ -191,6 +206,7 @@ const CustomerForm = () => {
                   name="arm"
                   id="arm"
                   className={inputStyles}
+                  {...register("arm", { required: true })}
                 />
               </div>
               <div className="w-1/2 ml-2">
@@ -250,6 +266,7 @@ const CustomerForm = () => {
             </div>
           </div>
         )}
+
         <section className="flex items-center justify-between flex-wrap mt-4">
           {step === 4 && (
             <button
@@ -260,9 +277,9 @@ const CustomerForm = () => {
               Enviar reporte
             </button>
           )}
+
           {step < 4 && (
             <button
-              type="submit"
               onClick={nextStep}
               className="inline-flex text-white bg-strongBlue border-0 py-2 px-6  focus:outline-none hover:bg-opacity-90 rounded text-lg"
             >
