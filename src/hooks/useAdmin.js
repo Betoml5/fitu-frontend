@@ -27,6 +27,7 @@ const useAdmin = () => {
         });
         return;
       }
+      setStatus({ loading: false, error: false });
 
       return data;
     } catch (error) {
