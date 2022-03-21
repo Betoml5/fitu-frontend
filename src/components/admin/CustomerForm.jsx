@@ -1,15 +1,16 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import { BsClipboardData } from "react-icons/bs";
 import { ImManWoman } from "react-icons/im";
 import { AiOutlineUser, AiOutlineCheck } from "react-icons/ai";
 
-import { useForm, useFormState } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { customerSchema } from "../../schemas/Customer";
+import useAdmin from "../../hooks/useAdmin";
 const CustomerForm = () => {
   const [step, setStep] = useState(1);
-
+  const { createCustomer, status } = useAdmin();
   const {
     register,
     handleSubmit,
@@ -23,7 +24,14 @@ const CustomerForm = () => {
     setStep(step + 1);
   };
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      await createCustomer(data);
+    } catch (error) {
+      throw error;
+    }
+  };
+
   const inputStyles = "p-4 rounded-lg w-full my-2";
   return (
     <form
@@ -302,7 +310,7 @@ const CustomerForm = () => {
               type="submit"
               className=" text-white bg-strongBlue border-0 py-2 px-6 focus:outline-none hover:bg-opacity-90rounded text-lg"
             >
-              Enviar reporte
+              {status.loading ? "Creando..." : "Crear usuario"}
             </button>
           )}
 
