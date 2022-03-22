@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 const CustomerDetails = () => {
-  const params = useParams();
+  const { id } = useParams();
 
-  console.log(params);
+  const getCustomerDetails = async () => {
+    try {
+    } catch (error) {}
+  };
+
+  useEffect(() => {}, []);
   return <div>CustomerDetails</div>;
 };
 

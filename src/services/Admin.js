@@ -20,3 +20,20 @@ export const getCustomersService = async () => {
     return error;
   }
 };
+
+export const findCustomerByNameService = async (name) => {
+  try {
+    const response = await axios.get(
+      `${BASE_API}/customers/customer?name=${name}`
+    );
+    return response.data.body;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getCustomerDetailsService = async () => {
+  try {
+    // const response = await axios
+  } catch (error) {}
+};
