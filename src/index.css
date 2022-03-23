@@ -6,6 +6,11 @@
 html {
   font-family: "Poppins";
   background-color: #203239;
+  height: 100vh;
+}
+
+body {
+  height: 100%;
 }
 
 .sideBarItem {

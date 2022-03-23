@@ -15,6 +15,7 @@ export const createCustomerService = async (customer) => {
 export const getCustomersService = async () => {
   try {
     const response = await axios.get(`${BASE_API}/customers/all`);
+    console.log(response.data.body);
     return response.data.body;
   } catch (error) {
     return error;
@@ -32,8 +33,11 @@ export const findCustomerByNameService = async (name) => {
   }
 };
 
-export const getCustomerDetailsService = async () => {
+export const getCustomerDetailsService = async (id) => {
   try {
-    // const response = await axios
-  } catch (error) {}
+    const response = await axios.get(`${BASE_API}/customers/customer/${id}`);
+    return response.data.body;
+  } catch (error) {
+    return error;
+  }
 };

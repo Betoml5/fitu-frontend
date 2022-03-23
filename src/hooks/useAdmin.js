@@ -1,7 +1,12 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../context/User";
-import { getCustomersService, createCustomerService } from "../services/Admin";
+import {
+  getCustomersService,
+  createCustomerService,
+  findCustomerByNameService,
+  getCustomerDetailsService,
+} from "../services/Admin";
 
 const useAdmin = () => {
   const { setStatus, status } = useContext(UserContext);
@@ -79,9 +84,84 @@ const useAdmin = () => {
     }
   };
 
+  const findCustomerByName = async (name) => {
+    try {
+      setStatus({ loading: true, error: false, msg: "" });
+      const data = await findCustomerByNameService(name);
+      if (!data) {
+        setStatus({
+          loading: false,
+          error: true,
+          msg: "Ocurrio un error inesperado en el servidor",
+        });
+        return;
+      }
+      if (data.response?.data?.error) {
+        setStatus({
+          loading: false,
+          error: true,
+          msg: data.response.data.error.message,
+        });
+        return;
+      }
+
+      setStatus({
+        loading: false,
+        error: false,
+      });
+      return data;
+    } catch (error) {
+      setStatus({
+        loading: false,
+        error: true,
+        msg: "Ocurrio un error inesperado en el servidor",
+      });
+      throw error;
+    }
+  };
+
+  const getCustomerDetails = async (id) => {
+    try {
+      setStatus({ loading: true, error: false, msg: "" });
+      const data = await getCustomerDetailsService(id);
+      console.log(data);
+      if (!data) {
+        setStatus({
+          loading: false,
+          error: true,
+          msg: "Ocurrio un error inesperado en el servidor",
+        });
+        return;
+      }
+      if (data.response?.data?.error) {
+        setStatus({
+          loading: false,
+          error: true,
+          msg: data.response.data.error.message,
+        });
+        return;
+      }
+
+      setStatus({
+        loading: false,
+        error: false,
+      });
+      return data;
+    } catch (error) {
+      setStatus({
+        loading: false,
+        error: true,
+        msg: "Ocurrio un error inesperado en el servidor",
+      });
+      throw error;
+    }
+  };
+
   return {
     getCustomers,
     createCustomer,
+    findCustomerByName,
+    getCustomerDetails,
     status,
   };
 };
