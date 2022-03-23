@@ -4,7 +4,6 @@ import {
   AiOutlineMenu,
   AiOutlineLogout,
   AiOutlineLogin,
-  AiOutlineUserAdd,
   AiOutlineUser,
   AiOutlineLineChart,
 } from "react-icons/ai";
@@ -26,7 +25,7 @@ const Sidebar = () => {
   if (user.role === "admin") {
     return (
       <div
-        className={`h-screen ${
+        className={`h-screen sticky top-0 ${
           open ? "w-56" : "w-20"
         } duration-500  bg-primary text-white sticky p-4  `}
       >
@@ -87,7 +86,7 @@ const Sidebar = () => {
 
   return (
     <div
-      className={`h-screen ${
+      className={`h-screen sticky top-0 ${
         open ? "w-56" : "w-20"
       } duration-500  bg-primary text-white sticky p-4  `}
     >

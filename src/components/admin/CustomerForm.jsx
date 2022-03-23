@@ -290,10 +290,82 @@ const CustomerForm = () => {
           <div className="text-white">
             <h3 className="text-xl">Confirmación de datos</h3>
             <div>
-              <p>Nombre: {watch("firstName")}</p>
-              <p>Apellidos: {watch("lastName")}</p>
-              <p>Numero de celular {watch("phone")}</p>
-              <p>Correo electronico {watch("email")}</p>
+              <p>
+                Nombre:{" "}
+                {watch("firstName") || (
+                  <span className="text-red-500">No ingresaste este campo</span>
+                )}
+              </p>
+              <p>
+                Apellidos:{" "}
+                {watch("lastName") || (
+                  <span className="text-red-500">No ingresaste este campo</span>
+                )}
+              </p>
+              <p>
+                Numero de celular{" "}
+                {watch("phone") || (
+                  <span className="text-red-500">No ingresaste este campo</span>
+                )}
+              </p>
+              <p>
+                Correo electronico{" "}
+                {watch("email") || (
+                  <span className="text-red-500">No ingresaste este campo</span>
+                )}
+              </p>
+              <p>
+                Edad:{" "}
+                {watch("age") || (
+                  <span className="text-red-500">No ingresaste este campo</span>
+                )}
+              </p>
+              <p>
+                Sexo:{" "}
+                {watch("sex") === "man"
+                  ? "Hombre"
+                  : "Mujer" || (
+                      <span className="text-red-500">
+                        No ingresaste este campo
+                      </span>
+                    )}
+              </p>
+              <p>
+                Peso:{" "}
+                {`${watch("weight")} kgs` || (
+                  <span className="text-red-500">No ingresaste este campo</span>
+                )}
+              </p>
+              <p>
+                Altura:{" "}
+                {watch("height") || (
+                  <span className="text-red-500">No ingresaste este campo</span>
+                )}
+              </p>
+              <p>
+                Brazo:{" "}
+                {watch("arm") || (
+                  <span className="text-red-500">No ingresaste este campo</span>
+                )}
+              </p>
+              <p>
+                Pierna:{" "}
+                {watch("leg") || (
+                  <span className="text-red-500">No ingresaste este campo</span>
+                )}
+              </p>
+              <p>
+                Cintura:{" "}
+                {watch("waist") || (
+                  <span className="text-red-500">No ingresaste este campo</span>
+                )}
+              </p>
+              <p>
+                Abdomen:{" "}
+                {watch("abdmen") || (
+                  <span className="text-red-500">No ingresaste este campo</span>
+                )}
+              </p>
             </div>
             {Object.keys(errors).length > 0 && (
               <p className="text-xl font-bold my-4 text-red-500 ">
