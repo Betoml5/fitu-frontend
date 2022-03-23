@@ -10,16 +10,11 @@ import { Link } from "react-router-dom";
 import useAdmin from "../../hooks/useAdmin";
 
 const Customers = () => {
-  const [loading, setLoading] = useState(false);
   const [customers, setCustomers] = useState([]);
-  const { getCustomers } = useAdmin();
+  const { getCustomers, status } = useAdmin();
 
   const handleSearch = () => {
-    setLoading(true);
-    setTimeout(() => {
-      console.log("hola");
-      setLoading(false);
-    }, 2000);
+    setTimeout(() => {}, 2000);
   };
 
   useEffect(() => {
@@ -43,7 +38,7 @@ const Customers = () => {
             onClick={handleSearch}
             className="flex items-center justify-center p-4 bg-strongBlue rounded-tr-lg rounded-br-lg w-1/4 mt-4 hover:bg-opacity-90"
           >
-            {loading ? (
+            {status.loading ? (
               <AiOutlineLoading3Quarters size={25} className="animate-spin" />
             ) : (
               <AiOutlineSearch size={25} />
