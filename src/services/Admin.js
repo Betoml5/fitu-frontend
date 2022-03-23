@@ -34,6 +34,6 @@ export const findCustomerByNameService = async (name) => {
 
 export const getCustomerDetailsService = async () => {
   try {
-    // const response = await axios
-  } catch (error) {}
+
+  } catch (error) { }
 };
