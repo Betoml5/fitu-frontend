@@ -4,7 +4,7 @@ import Layout from "./containers/Layout";
 import Home from "./pages/Home";
 import CustomerForm from "./components/admin/CustomerForm";
 import Customers from "./pages/admin/Customers";
-import Settings from "./pages/Settings";
+import Settings from "./pages/admin/Settings"
 import Meetings from "./pages/admin/Meetings";
 import PrivateRoutes from "./components/PrivateRoutes";
 import AdminRoutes from "./components/admin/AdminRoutes";

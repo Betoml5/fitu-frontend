@@ -117,6 +117,11 @@ const Sidebar = () => {
               </p>
             </Link>
 
+            <Link to="/ajustes" className="sideBarItem">
+              <IoMdSettings size={30} />
+              <p className={`${!open && "hidden"} sideBarItemText `}>Ajustes</p>
+            </Link>
+
             <div
               className="sideBarItem cursor-pointer"
               onClick={() => logout()}

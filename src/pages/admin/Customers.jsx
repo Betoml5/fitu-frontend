@@ -11,10 +11,16 @@ import useAdmin from "../../hooks/useAdmin";
 
 const Customers = () => {
   const [customers, setCustomers] = useState([]);
-  const { getCustomers, status } = useAdmin();
+  const { getCustomers, status, findCustomerByName } = useAdmin();
+  const [name, setName] = useState("");
 
-  const handleSearch = () => {
-    setTimeout(() => {}, 2000);
+  const handleSearch = async (name) => {
+    try {
+      const response = await findCustomerByName(name.toLowerCass());
+      setCustomers(response);
+    } catch (error) {
+      throw error;
+    }
   };
 
   useEffect(() => {
@@ -32,10 +38,11 @@ const Customers = () => {
           <input
             type="text"
             placeholder="Nombre del cliente"
+            onChange={(e) => setName(e.target.value)}
             className="text-black w-full p-4 rounded-tl-lg rounded-bl-lg mt-4 outline-none border-none placeholder:text-gray-500"
           />
           <button
-            onClick={handleSearch}
+            onClick={() => handleSearch(name)}
             className="flex items-center justify-center p-4 bg-strongBlue rounded-tr-lg rounded-br-lg w-1/4 mt-4 hover:bg-opacity-90"
           >
             {status.loading ? (

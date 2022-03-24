@@ -29,7 +29,6 @@ const Login = () => {
           required
           {...register("email", { required: true })}
         />
-        {errors.email && <span>Ingresa tu correo electronico</span>}
         <label htmlFor="password" className="text-white  my-2">
           Contraseña
         </label>
@@ -41,7 +40,6 @@ const Login = () => {
           required
           {...register("password", { required: true })}
         />
-        {errors.password && <span className="mt-4">Ingresa tu contraseña</span>}{" "}
         {status.error && (
           <span className="text-red-500 mt-4">{status.msg}</span>
         )}

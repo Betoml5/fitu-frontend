@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { BsClipboardData } from "react-icons/bs";
 import { ImManWoman } from "react-icons/im";
-import { AiOutlineUser, AiOutlineCheck } from "react-icons/ai";
+import {
+  AiOutlineUser,
+  AiOutlineCheck,
+  AiOutlineLoading3Quarters,
+} from "react-icons/ai";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -382,7 +386,11 @@ const CustomerForm = () => {
               type="submit"
               className=" text-white bg-strongBlue border-0 py-2 px-6 focus:outline-none hover:bg-opacity-90rounded text-lg"
             >
-              {status.loading ? "Creando..." : "Crear usuario"}
+              {status.loading ? (
+                <AiOutlineLoading3Quarters size={25} className="animate-spin" />
+              ) : (
+                "Crear usuario"
+              )}
             </button>
           )}
 

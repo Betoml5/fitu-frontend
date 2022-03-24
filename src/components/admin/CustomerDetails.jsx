@@ -19,7 +19,6 @@ const CustomerDetails = () => {
 
   useEffect(() => {
     getData();
-
     return () => {
       setCustomer(null);
     };
@@ -31,6 +30,7 @@ const CustomerDetails = () => {
           Nombre: {customer?.firstName} {customer?.lastName}
         </p>
         <p>Edad: {customer?.age}</p>
+        <p>Peso: {customer?.weight}</p>
       </section>
     </div>
   );
