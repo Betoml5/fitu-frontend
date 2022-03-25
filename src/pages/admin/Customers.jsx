@@ -55,19 +55,30 @@ const Customers = () => {
       </section>
 
       <section className="flex flex-col gap-y-1 mt-4">
-        {customers.map((customer) => (
-          <div className="relative text-white bg-strongBlue rounded-lg p-4 cursor-pointer hover:bg-opacity-90">
-            <Link
-              to={`/clientes/${customer._id}`}
-              className="font-semibold hover:underline"
-            >
-              {customer.firstName} {customer.lastName}
-            </Link>
-            <p>{faker.phone.phoneNumber()}</p>
-            <p>Ultima cita: {faker.date.weekday()}</p>
-            <AiOutlineUser size={25} className="absolute right-2 top-2" />
+        {customers.length > 0 ? (
+          customers.map((customer) => (
+            <div className="relative text-white bg-strongBlue rounded-lg p-4 cursor-pointer hover:bg-opacity-90">
+              <Link
+                to={`/clientes/${customer._id}`}
+                className="font-semibold hover:underline"
+              >
+                {customer.firstName} {customer.lastName}
+              </Link>
+              <p>{faker.phone.phoneNumber()}</p>
+              <p>Ultima cita: {faker.date.weekday()}</p>
+              <AiOutlineUser size={25} className="absolute right-2 top-2" />
+            </div>
+          ))
+        ) : (
+          <div className="text-white text-xl">
+            <p>
+              Aun no hay clientes{" "}
+              <Link to="/clientes/nuevo" className="underline">
+                Agregar cliente
+              </Link>
+            </p>
           </div>
-        ))}
+        )}
       </section>
     </div>
   );

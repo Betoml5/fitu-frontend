@@ -30,7 +30,15 @@ const CustomerForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      await createCustomer(data);
+      await createCustomer({
+        ...data,
+        sizes: {
+          leg: data.leg,
+          arm: data.arm,
+          waist: data.waist,
+          abdomen: data.abdomen,
+        },
+      });
     } catch (error) {
       throw error;
     }
@@ -119,6 +127,8 @@ const CustomerForm = () => {
               type="tel"
               pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
               placeholder="8611262242"
+              min={10}
+              max={10}
               className={`${inputStyles} `}
               required
               {...register("phone", { required: true })}
@@ -307,20 +317,20 @@ const CustomerForm = () => {
                 )}
               </p>
               <p>
-                Numero de celular{" "}
+                Numero de celular:{" "}
                 {watch("phone") || (
                   <span className="text-red-500">No ingresaste este campo</span>
                 )}
               </p>
               <p>
-                Correo electronico{" "}
+                Correo electronico:{" "}
                 {watch("email") || (
                   <span className="text-red-500">No ingresaste este campo</span>
                 )}
               </p>
               <p>
                 Edad:{" "}
-                {watch("age") || (
+                {`${watch("age")} años` || (
                   <span className="text-red-500">No ingresaste este campo</span>
                 )}
               </p>
@@ -342,31 +352,31 @@ const CustomerForm = () => {
               </p>
               <p>
                 Altura:{" "}
-                {watch("height") || (
+                {`${watch("height")} cm` || (
                   <span className="text-red-500">No ingresaste este campo</span>
                 )}
               </p>
               <p>
                 Brazo:{" "}
-                {watch("arm") || (
+                {`${watch("arm")} cm` || (
                   <span className="text-red-500">No ingresaste este campo</span>
                 )}
               </p>
               <p>
                 Pierna:{" "}
-                {watch("leg") || (
+                {`${watch("leg")} cm` || (
                   <span className="text-red-500">No ingresaste este campo</span>
                 )}
               </p>
               <p>
                 Cintura:{" "}
-                {watch("waist") || (
+                {`${watch("waist")} cm` || (
                   <span className="text-red-500">No ingresaste este campo</span>
                 )}
               </p>
               <p>
                 Abdomen:{" "}
-                {watch("abdmen") || (
+                {`${watch("abdomen")} cm` || (
                   <span className="text-red-500">No ingresaste este campo</span>
                 )}
               </p>

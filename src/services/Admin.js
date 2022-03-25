@@ -1,5 +1,6 @@
 import axios from "axios";
-const BASE_API = "http://localhost:3001/api";
+// const BASE_API = "http://localhost:3001/api";
+const BASE_API = process.env.REACT_APP_API;
 
 export const createCustomerService = async (customer) => {
   try {

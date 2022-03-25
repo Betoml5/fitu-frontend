@@ -1,30 +1,45 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 
 const Settings = () => {
-  return (
-    <div className="p-4">
-      <section className="text-white">
-        <h3 className="text-xl font-semibold">Ajustes</h3>
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
 
-        <section className="mt-4">
-          <h3 className="my-2 font-semibold">Cambiar contraseña</h3>
-          <form action="" className="flex flex-col">
-            <input
-              type="text"
-              placeholder="Contraseña anterior"
-              className="p-4 rounded-lg"
-            />
-            <input
-              type="text"
-              placeholder="Nueva contraseña"
-              className="p-4 my-4 rounded-lg"
-            />
-          </form>
-          <button className="p-4 bg-strongBlue rounded-lg w-full hover:bg-opacity-90">
-            Cambiar
-          </button>
-        </section>
-      </section>
+  const onSubmit = async () => {
+    try {
+    } catch (error) {}
+  };
+
+  return (
+    <div className="w-full max-w-xl mx-auto p-4">
+      <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
+        <label htmlFor="newPassword" className="text-white ">
+          Nueva Contraseña
+        </label>
+        <input
+          type="text"
+          placeholder="Nueva Contraseña"
+          className="w-full rounded-md p-4 my-4"
+          {...register("newpassword", { required: true })}
+        />
+        <label htmlFor="newPassword" className="text-white ">
+          Vieja Contraseña
+        </label>
+        <input
+          type="text"
+          placeholder="Vieja Contraseña"
+          className="w-full rounded-md p-4 mt-2"
+          {...register("password", { required: true })}
+        />
+        <input
+          type="submit"
+          value="Cambiar"
+          className=" font-semibold w-full  rounded-lg p-4 mt-4 cursor-pointer bg-strongBlue text-white hover:bg-opacity-90"
+        />
+      </form>
     </div>
   );
 };

@@ -6,6 +6,7 @@ import {
   AiOutlineLogin,
   AiOutlineUser,
   AiOutlineLineChart,
+  AiOutlineSchedule,
 } from "react-icons/ai";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { FaUserPlus } from "react-icons/fa";
@@ -55,12 +56,19 @@ const Sidebar = () => {
                   Clientes
                 </p>
               </Link>
+              <Link to="/citas/nueva" className="sideBarItem">
+                <AiOutlineSchedule size={30} />
+                <p className={`${!open && "hidden"} sideBarItemText `}>
+                  Nueva Cita
+                </p>
+              </Link>
               <Link to="/ajustes" className="sideBarItem">
                 <IoMdSettings size={30} />
                 <p className={`${!open && "hidden"} sideBarItemText `}>
                   Ajustes
                 </p>
               </Link>
+
               <div
                 className="sideBarItem cursor-pointer"
                 onClick={() => logout()}
