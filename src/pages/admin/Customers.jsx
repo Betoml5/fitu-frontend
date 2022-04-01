@@ -3,9 +3,10 @@ import {
   AiOutlineSearch,
   AiOutlineUser,
   AiOutlineLoading3Quarters,
+  AiOutlineSchedule,
 } from "react-icons/ai";
 import faker from "faker";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import useAdmin from "../../hooks/useAdmin";
 
@@ -13,6 +14,8 @@ const Customers = () => {
   const [customers, setCustomers] = useState([]);
   const { getCustomers, status, findCustomerByName } = useAdmin();
   const [name, setName] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSearch = async (name) => {
     try {
@@ -67,6 +70,12 @@ const Customers = () => {
               <p>{faker.phone.phoneNumber()}</p>
               <p>Ultima cita: {faker.date.weekday()}</p>
               <AiOutlineUser size={25} className="absolute right-2 top-2" />
+              <Link
+                to={`/citas/nueva/${customer._id}`}
+                className="absolute right-2 bottom-2"
+              >
+                <AiOutlineSchedule size={25} title="Crear cita" />
+              </Link>
             </div>
           ))
         ) : (
