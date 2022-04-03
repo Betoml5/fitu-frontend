@@ -157,6 +157,12 @@ const useAdmin = () => {
     }
   };
 
+  const createMeeting = async () => {
+    try {
+      setStatus({ loading: true, error: false, msg: "" });
+    } catch (error) {}
+  };
+
   return {
     getCustomers,
     createCustomer,

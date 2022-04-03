@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAdmin from "../../hooks/useAdmin";
 
 import { AiOutlineUser } from "react-icons/ai";
+import { BiArrowBack } from "react-icons/bi";
 
 const CustomerDetails = () => {
   const { id } = useParams();
   const { getCustomerDetails } = useAdmin();
-
   const [customer, setCustomer] = useState({});
+
+  const navigate = useNavigate();
 
   const getData = async () => {
     try {
@@ -26,7 +28,13 @@ const CustomerDetails = () => {
     };
   }, []);
   return (
-    <div className="w-full">
+    <div className="w-full p-4">
+      <BiArrowBack
+        className="cursor-pointer mb-4"
+        size={25}
+        color="#fff"
+        onClick={() => navigate(-1)}
+      />
       <section className="relative text-white p-4 shadow-lg ">
         <p>
           Nombre:{" "}

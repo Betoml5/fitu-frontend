@@ -5,6 +5,7 @@ import useAdmin from "../../hooks/useAdmin";
 
 const MeetingForm = () => {
   const [customer, setCustomer] = useState({});
+  // const [success, setSucces]  =
   const { id } = useParams();
   const {
     handleSubmit,
@@ -14,20 +15,24 @@ const MeetingForm = () => {
 
   const { getCustomerDetails } = useAdmin();
 
-  console.log(customer);
-
   useEffect(() => {
     getCustomerDetails(id)
       .then((data) => setCustomer(data))
       .catch((error) => {
-        console.log(error);
         throw error;
       });
   }, []);
 
+  const onSubmit = async (data) => {
+    console.log(data);
+  };
+
   return (
     <div className="w-full p-4">
-      <form className="flex flex-col max-w-3xl mx-auto">
+      <form
+        className="flex flex-col max-w-3xl mx-auto"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <label htmlFor="firstName" className="text-white font-semibold text-lg">
           Nombre
         </label>
@@ -64,7 +69,16 @@ const MeetingForm = () => {
         <label htmlFor="date" className="text-white font-semibold text-lg mt-4">
           Fecha y hora
         </label>
-        <input type="datetime-local" className="mt-4 p-4 rounded-md" />
+        <input
+          type="datetime-local"
+          className="mt-4 p-4 rounded-md"
+          {...register("date", { required: true })}
+        />
+        {errors.date && (
+          <p className="text-red-500 font-semibold my-4">
+            La fecha y hora son requeridas
+          </p>
+        )}
         <button
           type="submit"
           className="bg-strongBlue p-4 mt-4 rounded-lg text-white font-semibold hover:bg-opacity-90"

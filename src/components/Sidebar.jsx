@@ -56,12 +56,12 @@ const Sidebar = () => {
                   Clientes
                 </p>
               </Link>
-              <Link to="/citas/nueva" className="sideBarItem">
+              {/* <Link to="/citas/nueva" className="sideBarItem">
                 <AiOutlineSchedule size={30} />
                 <p className={`${!open && "hidden"} sideBarItemText `}>
                   Nueva Cita
                 </p>
-              </Link>
+              </Link> */}
               <Link to="/ajustes" className="sideBarItem">
                 <IoMdSettings size={30} />
                 <p className={`${!open && "hidden"} sideBarItemText `}>
