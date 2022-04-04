@@ -41,3 +41,8 @@ export const getCustomerDetailsService = async (id) => {
     return error;
   }
 };
+
+export const createMeeting = async () => {
+  try {
+  } catch (error) {}
+};
