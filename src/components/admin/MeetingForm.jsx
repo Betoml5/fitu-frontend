@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import useAdmin from "../../hooks/useAdmin";
+import { format, parseISO } from "date-fns";
 
 const MeetingForm = () => {
   const [customer, setCustomer] = useState({});
@@ -24,7 +25,10 @@ const MeetingForm = () => {
   }, []);
 
   const onSubmit = async (data) => {
-    console.log(data);
+    console.log(data.date);
+    let parsedDate = parseISO(data.date);
+    let formatedDate = format(parsedDate, "dd/MM/yyyy");
+    console.log(formatedDate);
   };
 
   return (
