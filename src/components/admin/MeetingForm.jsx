@@ -16,9 +16,7 @@ const MeetingForm = () => {
 
   useEffect(() => {
     getCustomerDetails(id)
-      .then((data) => {
-        console.log(data);
-      })
+      .then((data) => setCustomer(data))
       .catch((error) => {
         console.log(error);
         throw error;
@@ -29,7 +27,9 @@ const MeetingForm = () => {
     <div>
       <div>
         <form>
-          <label htmlFor=""></label>
+          <label htmlFor="firstName">Nombre</label>
+          <input type="text" disabled defaultValue={customer.firstName} />
+          <input type="text" disabled defaultValue={customer.lastName} />
         </form>
       </div>
     </div>
