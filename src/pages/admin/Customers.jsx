@@ -34,7 +34,7 @@ const Customers = () => {
   }, []);
 
   return (
-    <div className="w-full p-4 max-w-3xl mx-auto">
+    <div className=" w-full p-4 max-w-3xl mx-auto">
       <section className=" text-white">
         <h3 className="font-semibold text-xl">Clientes</h3>
         <div className="flex items-center ">

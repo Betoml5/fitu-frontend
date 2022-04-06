@@ -42,7 +42,44 @@ export const getCustomerDetailsService = async (id) => {
   }
 };
 
-export const createMeeting = async () => {
+export const createMeetingsService = async (meeting) => {
   try {
-  } catch (error) {}
+    if (!meeting) {
+      throw new Error("Missing meeting data");
+    }
+    const response = await axios.post(`${BASE_API}/meetings/create`, {
+      meeting: meeting,
+    });
+    return response.data.body;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getOneMeetingService = async (id) => {
+  try {
+    if (!id) {
+      throw new Error("Missing id");
+    }
+
+    const response = await axios.get(`${BASE_API}/meetings/${id}`);
+    return response.data.body;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const updateOneMeetingService = async (id, meeting) => {
+  try {
+    if (!id || !meeting) {
+      throw new Error("Missing id or meeting");
+    }
+
+    const response = await axios.put(`${BASE_API}/meetings/update/${id}`, {
+      meeting: meeting,
+    });
+    return response.data.body;
+  } catch (error) {
+    return error;
+  }
 };
