@@ -83,3 +83,15 @@ export const updateOneMeetingService = async (id, meeting) => {
     return error;
   }
 };
+
+export const deleteOneMeetingService = async (id) => {
+  try {
+    if (!id) {
+      throw new Error("Missing data");
+    }
+    const response = await axios.delete(`${BASE_API}/meetings/delete/${id}`);
+    return response.data.body;
+  } catch (error) {
+    return error;
+  }
+};
