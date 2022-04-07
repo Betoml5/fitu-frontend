@@ -7,6 +7,7 @@ import {
   findCustomerByNameService,
   getCustomerDetailsService,
   createMeetingService,
+  getAllMeetingsService,
 } from "../services/Admin";
 
 const useAdmin = () => {
@@ -196,12 +197,42 @@ const useAdmin = () => {
     }
   };
 
+  const getAllMeetings = async () => {
+    try {
+      setStatus({ loading: true, error: false, msg: "" });
+      const data = await getAllMeetingsService();
+      if (!data) {
+        setStatus({
+          loading: false,
+          error: true,
+          msg: "Ocurrio un error inesperado en el servidor",
+        });
+        return;
+      }
+      if (data.response?.data?.error) {
+        setStatus({
+          loading: false,
+          error: true,
+          msg: data.response.data.error.message,
+        });
+        return;
+      }
+
+      setStatus({
+        loading: false,
+        error: false,
+      });
+      return data;
+    } catch (error) {}
+  };
+
   return {
     getCustomers,
     createCustomer,
     findCustomerByName,
     getCustomerDetails,
     createMeeting,
+    getAllMeetings,
     status,
   };
 };
