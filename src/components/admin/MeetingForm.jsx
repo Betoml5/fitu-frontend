@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import useAdmin from "../../hooks/useAdmin";
-import { format, parseISO } from "date-fns";
+import { format, parseISO, compareAsc } from "date-fns";
 
 const MeetingForm = () => {
   const [customer, setCustomer] = useState({});
@@ -11,10 +11,11 @@ const MeetingForm = () => {
   const {
     handleSubmit,
     register,
+    watch,
     formState: { errors },
   } = useForm();
 
-  const { getCustomerDetails } = useAdmin();
+  const { getCustomerDetails, createMeeting } = useAdmin();
 
   useEffect(() => {
     getCustomerDetails(id)
@@ -25,11 +26,21 @@ const MeetingForm = () => {
   }, []);
 
   const onSubmit = async (data) => {
-    console.log(data.date);
-    let parsedDate = parseISO(data.date);
-    let formatedDate = format(parsedDate, "dd/MM/yyyy");
-    console.log(formatedDate);
+    const meeting = {
+      customer: id,
+      date: new Date(data.date).toISOString(),
+    };
+    try {
+      const response = await createMeeting(meeting);
+      console.log(response);
+    } catch (error) {
+      throw error;
+    }
+    // console.log(data.date);    // let parsedDate = parseISO(data.date);
+    // let formatedDate = format(parsedDate, "dd/MM/yyyy");
+    // console.log(formatedDate);
   };
+  console.log(watch("date"));
 
   return (
     <div className="w-full p-4">

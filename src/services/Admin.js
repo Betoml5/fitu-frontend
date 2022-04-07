@@ -42,7 +42,7 @@ export const getCustomerDetailsService = async (id) => {
   }
 };
 
-export const createMeetingsService = async (meeting) => {
+export const createMeetingService = async (meeting) => {
   try {
     if (!meeting) {
       throw new Error("Missing meeting data");
@@ -90,6 +90,15 @@ export const deleteOneMeetingService = async (id) => {
       throw new Error("Missing data");
     }
     const response = await axios.delete(`${BASE_API}/meetings/delete/${id}`);
+    return response.data.body;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getAllMeetingsService = async () => {
+  try {
+    const response = await axios.get(`${BASE_API}/meetings/all`);
     return response.data.body;
   } catch (error) {
     return error;

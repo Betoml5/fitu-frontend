@@ -6,6 +6,7 @@ import {
   createCustomerService,
   findCustomerByNameService,
   getCustomerDetailsService,
+  createMeetingService,
 } from "../services/Admin";
 
 const useAdmin = () => {
@@ -124,7 +125,43 @@ const useAdmin = () => {
     try {
       setStatus({ loading: true, error: false, msg: "" });
       const data = await getCustomerDetailsService(id);
-      console.log(data);
+      if (!data) {
+        setStatus({
+          loading: false,
+          error: true,
+          msg: "Ocurrio un error inesperado en el servidor",
+        });
+        return;
+      }
+      if (data.response?.data?.error) {
+        setStatus({
+          loading: false,
+          error: true,
+          msg: data.response.data.error.message,
+        });
+        return;
+      }
+
+      setStatus({
+        loading: false,
+        error: false,
+        msg: "Cita creada correctamente",
+      });
+      return data;
+    } catch (error) {
+      setStatus({
+        loading: false,
+        error: true,
+        msg: "Ocurrio un error inesperado en el servidor",
+      });
+      throw error;
+    }
+  };
+
+  const createMeeting = async (meeting) => {
+    try {
+      setStatus({ loading: true, error: false, msg: "" });
+      const data = await createMeetingService(meeting);
       if (!data) {
         setStatus({
           loading: false,
@@ -153,14 +190,10 @@ const useAdmin = () => {
         error: true,
         msg: "Ocurrio un error inesperado en el servidor",
       });
+      //En lugar de devolver el error con
+      // return error. Lo propagamos, ya que no nos interesa guardar un error en la repuesta.
       throw error;
     }
-  };
-
-  const createMeeting = async () => {
-    try {
-      setStatus({ loading: true, error: false, msg: "" });
-    } catch (error) {}
   };
 
   return {
@@ -168,6 +201,7 @@ const useAdmin = () => {
     createCustomer,
     findCustomerByName,
     getCustomerDetails,
+    createMeeting,
     status,
   };
 };
