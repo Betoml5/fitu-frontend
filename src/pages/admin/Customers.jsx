@@ -6,7 +6,7 @@ import {
   AiOutlineSchedule,
 } from "react-icons/ai";
 import faker from "faker";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import useAdmin from "../../hooks/useAdmin";
 
@@ -14,8 +14,6 @@ const Customers = () => {
   const [customers, setCustomers] = useState([]);
   const { getCustomers, status, findCustomerByName } = useAdmin();
   const [name, setName] = useState("");
-
-  const navigate = useNavigate();
 
   const handleSearch = async (name) => {
     try {
@@ -34,7 +32,7 @@ const Customers = () => {
   }, []);
 
   return (
-    <div className="w-full p-4 max-w-3xl mx-auto">
+    <div className=" w-full p-4 max-w-3xl mx-auto">
       <section className=" text-white">
         <h3 className="font-semibold text-xl">Clientes</h3>
         <div className="flex items-center ">

@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import useAdmin from "../../hooks/useAdmin";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { format, parseISO } from "date-fns";
+var { zonedTimeToUtc } = require("date-fns-tz");
 
 const MeetingForm = () => {
   const [customer, setCustomer] = useState({});
@@ -11,10 +13,11 @@ const MeetingForm = () => {
   const {
     handleSubmit,
     register,
+    watch,
     formState: { errors },
   } = useForm();
 
-  const { getCustomerDetails } = useAdmin();
+  const { getCustomerDetails, createMeeting, status } = useAdmin();
 
   useEffect(() => {
     getCustomerDetails(id)
@@ -22,14 +25,28 @@ const MeetingForm = () => {
       .catch((error) => {
         throw error;
       });
+
+    return () => {
+      setCustomer(null);
+    };
   }, []);
 
   const onSubmit = async (data) => {
-    console.log(data.date);
-    let parsedDate = parseISO(data.date);
-    let formatedDate = format(parsedDate, "dd/MM/yyyy");
-    console.log(formatedDate);
+    const meeting = {
+      user: id,
+      date: data.date,
+    };
+    try {
+      const response = await createMeeting(meeting);
+      console.log(response);
+    } catch (error) {
+      throw error;
+    }
+    // console.log(data.date);    // let parsedDate = parseISO(data.date);
+    // let formatedDate = format(parsedDate, "dd/MM/yyyy");
+    // console.log(formatedDate);
   };
+  console.log(watch("date"));
 
   return (
     <div className="w-full p-4">
@@ -42,7 +59,7 @@ const MeetingForm = () => {
         </label>
         <input
           type="text"
-          defaultValue={customer.firstName}
+          defaultValue={customer?.firstName}
           className="p-2 rounded-md mt-2"
           readOnly
         />
@@ -54,7 +71,7 @@ const MeetingForm = () => {
         </label>
         <input
           type="text"
-          defaultValue={customer.lastName}
+          defaultValue={customer?.lastName}
           className="p-2 rounded-md mt-2"
           readOnly
         />
@@ -66,7 +83,7 @@ const MeetingForm = () => {
         </label>
         <input
           type="text"
-          defaultValue={customer.phone}
+          defaultValue={customer?.phone}
           className="p-2 rounded-md mt-2"
           readOnly
         />
@@ -83,11 +100,16 @@ const MeetingForm = () => {
             La fecha y hora son requeridas
           </p>
         )}
+
         <button
           type="submit"
-          className="bg-strongBlue p-4 mt-4 rounded-lg text-white font-semibold hover:bg-opacity-90"
+          className="flex justify-center bg-strongBlue p-4 mt-4 rounded-lg text-white font-semibold hover:bg-opacity-90"
         >
-          Crear cita
+          {status.loading ? (
+            <AiOutlineLoading3Quarters size={25} className="animate-spin" />
+          ) : (
+            "Crear cita"
+          )}
         </button>
       </form>
     </div>

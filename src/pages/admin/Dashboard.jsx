@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   return (
-    <div className="flex flex-col gap-y-2  w-full max-w-3xl p-4 mx-auto">
+    <div className="flex flex-col  gap-y-2  w-full max-w-3xl p-4 mx-auto">
       <section>
         <h3 className="text-white text-xl font-semibold mb-6">Dashboard</h3>
         <div className="relative bg-strongBlue p-4 text-white rounded-xl cursor-pointer hover:bg-opacity-90">

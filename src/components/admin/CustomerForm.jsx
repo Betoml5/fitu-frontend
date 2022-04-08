@@ -49,7 +49,7 @@ const CustomerForm = () => {
     <form
       id="customerForm"
       name="customerForm"
-      className="w-full max-w-3xl mx-auto self-center"
+      className="w-full max-w-3xl mx-auto mt-10"
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="flex flex-col w-11/12 mx-auto">
