@@ -28,10 +28,10 @@ const CustomerDetails = () => {
     };
   }, []);
   return (
-    <div className="w-full p-4">
+    <div className="w-full p-4 max-w-3xl mx-auto">
       <BiArrowBack
         className="cursor-pointer mb-4"
-        size={25}
+        size={35}
         color="#fff"
         onClick={() => navigate(-1)}
       />
