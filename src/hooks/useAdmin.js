@@ -8,6 +8,7 @@ import {
   getCustomerDetailsService,
   createMeetingService,
   getAllMeetingsService,
+  deleteOneMeetingService,
 } from "../services/Admin";
 
 const useAdmin = () => {
@@ -223,7 +224,49 @@ const useAdmin = () => {
         error: false,
       });
       return data;
-    } catch (error) {}
+    } catch (error) {
+      setStatus({
+        loading: false,
+        error: true,
+        msg: "Ocurrio un error inesperado en el servidor",
+      });
+      throw error;
+    }
+  };
+
+  const deleteMeeting = async (id) => {
+    try {
+      const data = await deleteOneMeetingService(id);
+      if (!data) {
+        setStatus({
+          loading: false,
+          error: true,
+          msg: "Ocurrio un error inesperado en el servidor",
+        });
+        return;
+      }
+      if (data.response?.data?.error) {
+        setStatus({
+          loading: false,
+          error: true,
+          msg: data.response.data.error.message,
+        });
+        return;
+      }
+
+      setStatus({
+        loading: false,
+        error: false,
+      });
+      return data;
+    } catch (error) {
+      setStatus({
+        loading: false,
+        error: true,
+        msg: "Ocurrio un error inesperado en el servidor",
+      });
+      throw error;
+    }
   };
 
   return {
@@ -233,6 +276,7 @@ const useAdmin = () => {
     getCustomerDetails,
     createMeeting,
     getAllMeetings,
+    deleteMeeting,
     status,
   };
 };
