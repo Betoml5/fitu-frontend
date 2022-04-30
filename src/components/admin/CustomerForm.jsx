@@ -346,37 +346,53 @@ const CustomerForm = () => {
               </p>
               <p>
                 Peso:{" "}
-                {`${watch("weight")} kgs` || (
+                {watch("weight") ? (
+                  `${watch("weight")} kg`
+                ) : (
                   <span className="text-red-500">No ingresaste este campo</span>
                 )}
+                {/* Peso:{" "}
+                {`${watch("weight")} kgs` || (
+                  <span className="text-red-500">No ingresaste este campo</span>
+                )} */}
               </p>
               <p>
                 Altura:{" "}
-                {`${watch("height")} cm` || (
+                {watch("height") ? (
+                  `${watch("height")} cm`
+                ) : (
                   <span className="text-red-500">No ingresaste este campo</span>
                 )}
               </p>
               <p>
                 Brazo:{" "}
-                {`${watch("arm")} cm` || (
+                {watch("arm") ? (
+                  `${watch("arm")} cm`
+                ) : (
                   <span className="text-red-500">No ingresaste este campo</span>
                 )}
               </p>
               <p>
                 Pierna:{" "}
-                {`${watch("leg")} cm` || (
+                {watch("leg") ? (
+                  `${watch("leg")} cm`
+                ) : (
                   <span className="text-red-500">No ingresaste este campo</span>
                 )}
               </p>
               <p>
                 Cintura:{" "}
-                {`${watch("waist")} cm` || (
+                {watch("waist") ? (
+                  `${watch("waist")} cm`
+                ) : (
                   <span className="text-red-500">No ingresaste este campo</span>
                 )}
               </p>
               <p>
                 Abdomen:{" "}
-                {`${watch("abdomen")} cm` || (
+                {watch("abdomen") ? (
+                  `${watch("abdomen")} cm`
+                ) : (
                   <span className="text-red-500">No ingresaste este campo</span>
                 )}
               </p>
